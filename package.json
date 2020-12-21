@@ -5,9 +5,10 @@
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
 	"scripts": {
+		"build": "tsc",
 		"lint": "eslint src",
 		"lint:fix": "eslint src --fix",
-		"test": "uvu -r ts-node/register src .*\\.test\\.ts",
+		"test": "uvu -r ts-node/register src .*\\.test\\..*",
 		"test:watch": "watchlist src -- npm test"
 	},
 	"keywords": [
