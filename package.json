@@ -1,0 +1,19 @@
+{
+   "name": "typesafe-utils",
+   "version": "1.0.0",
+   "description": "A few small typesafe utilities",
+   "main": "lib/index.js",
+   "types": "lib/index.d.ts",
+   "scripts": {},
+   "keywords": [
+      "typescript",
+      "typesafe",
+      "utilities",
+      "utils"
+   ],
+   "author": "ivanhofer",
+   "license": "ISC",
+   "devDependencies": {
+      "typescript": "^4.1.3"
+   }
+}
