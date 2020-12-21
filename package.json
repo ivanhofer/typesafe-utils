@@ -2,6 +2,16 @@
 	"name": "typesafe-utils",
 	"version": "1.0.0",
 	"description": "A few small typesafe utilities",
+	"author": "ivanhofer",
+	"keywords": [
+		"typescript",
+		"utilities",
+		"lightweight",
+		"small",
+		"typesafe",
+		"utils"
+	],
+	"license": "ISC",
 	"main": "lib/index.js",
 	"types": "lib/index.d.ts",
 	"scripts": {
@@ -11,14 +21,6 @@
 		"test": "uvu -r ts-node/register src .*\\.test\\..*",
 		"test:watch": "watchlist src -- npm test"
 	},
-	"keywords": [
-		"typescript",
-		"typesafe",
-		"utilities",
-		"utils"
-	],
-	"author": "ivanhofer",
-	"license": "ISC",
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^4.10.0",
 		"@typescript-eslint/parser": "^4.10.0",
