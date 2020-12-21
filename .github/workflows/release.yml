@@ -16,5 +16,10 @@ jobs:
       steps:
          - uses: actions/checkout@v2
 
-         - name: Update version in package.json
-           uses: maks-stupak/gh-action-bump-version@v7.1.5
+         - name: 'Automated Version Bump'
+           uses: 'phips28/gh-action-bump-version@master'
+           env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           with:
+              default: minor
+              patch-wording: 'patch,fixes'
