@@ -6,7 +6,9 @@
 	"types": "lib/index.d.ts",
 	"scripts": {
 		"lint": "eslint src",
-		"lint:fix": "eslint src --fix"
+		"lint:fix": "eslint src --fix",
+		"test": "uvu -r ts-node/register src .*\\.test\\.ts",
+		"test:watch": "watchlist src -- npm test"
 	},
 	"keywords": [
 		"typescript",
@@ -23,6 +25,9 @@
 		"eslint-config-prettier": "^7.1.0",
 		"eslint-plugin-prettier": "^3.3.0",
 		"prettier": "^2.2.1",
-		"typescript": "^4.1.3"
+		"ts-node": "^9.1.1",
+		"typescript": "^4.1.3",
+		"uvu": "^0.5.1",
+		"watchlist": "^0.2.3"
 	}
 }
