@@ -16,8 +16,7 @@ jobs:
            env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
            with:
-              default: minor
-              patch-wording: 'fix,fixes,patch'
+              minor-wording: 'feat,feature'
 
    puplish:
       name: publish package to npm repository
