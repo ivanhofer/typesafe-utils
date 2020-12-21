@@ -4,8 +4,6 @@ on:
    push:
       branches:
          - 'master'
-   pull_request:
-      types: [closed]
 
 jobs:
    version-bump:
@@ -19,6 +17,7 @@ jobs:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
            with:
               default: minor
+              patch-wording: 'fix,fixes,patch'
 
    puplish:
       name: publish package to npm repository

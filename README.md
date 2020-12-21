@@ -21,7 +21,7 @@ $ npm install --save-dev typesafe-utils
 
 ### deepClone
 
-Creates a deep copy of an object. Can also be used to copy priimitive values.
+Creates a deep copy of an object. Can also be used to copy primitive values.
 
 > Motivation: I have seen a variety of clone-functions that return any. There you would need to always specify the type by ourself. Using this function, you will get a correctly typed object back.
 
