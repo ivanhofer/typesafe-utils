@@ -1,6 +1,9 @@
 name: Update version & publish to npm
 
 on:
+   push:
+      branches:
+         - 'master'
    pull_request:
       types: [closed]
 
