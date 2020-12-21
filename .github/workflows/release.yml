@@ -1,13 +1,8 @@
 name: Update version & publish to npm
 
-# on:
-#   pull_request:
-#     types: closed
-
 on:
-   push:
-      branches:
-         - gh-actions
+   pull_request:
+      types: [closed]
 
 jobs:
    version-bump:
@@ -19,11 +14,11 @@ jobs:
          - uses: 'phips28/gh-action-bump-version@master'
            env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         #   with:
-         #      default: minor
+           with:
+              default: minor
 
-   puplish-to-npm:
-      name: publish to npm
+   puplish:
+      name: publish package to npm repository
       needs: version-bump
       runs-on: ubuntu-latest
       steps:
