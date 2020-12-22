@@ -20,10 +20,10 @@ export type False<T> = T extends false ? T : never
 
 export type NotFalse<T> = T extends false ? never : T
 
-export type Zero<T> = T extends 0 ? T : never
+export type Zero<T> = T extends number ? 0 : never
 
-export type NotZero<T> = T extends 0 ? never : T
+export type NotZero<T> = T extends number ? never : T
 
-export type Empty<T> = T extends '' ? T : never
+export type Empty<T> = T extends string ? '' : never
 
-export type NotEmpty<T> = T extends '' ? never : T
+export type NotEmpty<T> = T extends string ? never : T

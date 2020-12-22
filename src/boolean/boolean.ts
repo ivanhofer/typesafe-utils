@@ -35,10 +35,10 @@ export const isFalse = <T>(value: T): value is False<T> => <unknown>value === fa
 
 export const isNotFalse = <T>(value: T): value is NotFalse<T> => <unknown>value !== false
 
-export const isZero = <T>(value: T): value is Zero<T> => <unknown>value === 0
+export const isZero = <T>(value: T | 0): value is Zero<T> => <unknown>value === 0
 
 export const isNotZero = <T>(value: T): value is NotZero<T> => <unknown>value !== 0
 
-export const isEmpty = <T>(value: T): value is Empty<T> => <unknown>value === ''
+export const isEmpty = <T>(value: T | ''): value is Empty<T> => <unknown>value === ''
 
 export const isNotEmpty = <T>(value: T): value is NotEmpty<T> => <unknown>value !== ''
