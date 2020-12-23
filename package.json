@@ -24,7 +24,8 @@
 		"lint:fix": "eslint src --fix",
 		"test": "uvu -r ts-node/register src .*\\.test\\..*",
 		"test:watch": "watchlist src -- npm test",
-		"coverage": "nyc npm run test"
+		"coverage": "nyc npm run test",
+		"coverage:output-report": "nyc report > coverage-report.txt"
 	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "^1.0.1",
