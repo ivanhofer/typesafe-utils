@@ -6,17 +6,10 @@ on:
          - 'master'
 
 jobs:
-   puplish:
+   publish:
       runs-on: ubuntu-latest
       steps:
          - uses: actions/checkout@v2
-
-         - name: bump version and create tag
-           uses: 'phips28/gh-action-bump-version@master'
-           env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-           with:
-              minor-wording: 'feat,feature'
 
          - name: install node
            uses: actions/setup-node@v1
@@ -37,6 +30,13 @@ jobs:
               path: coverage-report.txt
 
          - run: npm run build
+
+         - name: bump version and create tag
+           uses: 'phips28/gh-action-bump-version@master'
+           env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           with:
+              minor-wording: 'feat,feature'
 
          - uses: JS-DevTools/npm-publish@v1
            with:
