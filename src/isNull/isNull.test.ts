@@ -8,7 +8,7 @@ const test = suite('null')
 const nullValues = [null]
 const notNullValues = [-Infinity, -1, 1, Infinity, 'test', true, [], {}, undefined, 0, '', false]
 
-// isNull -----------------------------------------------------------------------------------------------------
+// isNull -------------------------------------------------------------------------------------------------------------
 
 nullValues.forEach((value) => test(`isNull ${value}`, () => assert.ok(isNull(value))))
 notNullValues.forEach((value) => test(`! isNull ${value}`, () => assert.not(isNull(value))))
@@ -16,7 +16,7 @@ notNullValues.forEach((value) => test(`! isNull ${value}`, () => assert.not(isNu
 const _nullType: null[] = [...nullValues, notNullValues].filter(isNull)
 const _neverType: never[] = notNullValues.filter(isNull)
 
-// isNotNull -----------------------------------------------------------------------------------------------------
+// isNotNull ----------------------------------------------------------------------------------------------------------
 
 notNullValues.forEach((value) => test(`isNotNull ${value}`, () => assert.ok(isNotNull(value))))
 nullValues.forEach((value) => test(`! isNotNull ${value}`, () => assert.not(isNotNull(value))))
@@ -24,7 +24,7 @@ nullValues.forEach((value) => test(`! isNotNull ${value}`, () => assert.not(isNo
 const _allNotType: ({} | undefined)[] = [...nullValues, ...notNullValues].filter(isNotNull)
 const _neverNotType: never[] = nullValues.filter(isNotNull)
 
-// isPropertyNull ------------------------------------------------------------------------------------------------
+// isPropertyNull -----------------------------------------------------------------------------------------------------
 
 test(`isPropertyNotNull id`, () => {
 	const items = [{ id: 0 }, { id: undefined }, { id: null }]
