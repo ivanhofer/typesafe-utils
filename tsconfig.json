@@ -26,11 +26,11 @@
 		"forceConsistentCasingInFileNames": true
 	},
 	"include": ["src/**/*"],
-	"exclude": ["node_modules", "src/**/*.test.*"],
+	"exclude": ["node_modules"],
 	"ts-node": {
-		"transpileOnly": true,
 		"compilerOptions": {
-			"module": "commonjs"
+			"module": "commonjs",
+			"noUnusedLocals": false
 		},
 		"include": ["src/**/*.test.*"]
 	}
