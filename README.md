@@ -13,7 +13,6 @@ $ npm install --save-dev typesafe-utils
 ```
 
 ## Overview
- - [deepClone](#deepClone)
  - [boolean utils](#boolean\ utils)
     - [isTruthy](#isTruthy)
     - [isFalsy](#isFalsy)
@@ -29,24 +28,9 @@ $ npm install --save-dev typesafe-utils
     - [isNotZero](#isNotZero)
     - [isEmpty](#isEmpty)
     - [isNotEmpty](#isNotEmpty)
+ - [deepClone](#deepClone)
 
 ## Utilities
-
-### deepClone
-
-Creates a deep copy of an object. Can also be used to copy primitive values.
-
-> Motivation: I have seen a variety of clone-functions that return any. There you would need to always specify the type by ourself. Using this function, you will get a correctly typed object back.
-
-#### Usage
-
-```TypeScript
-import { deepClone } from 'typesafe-utils'
-
-const objectToClone: MyTypedObject = { ... }
-const clonedObject = deepClone(objectToClone)
-// => clonedObject: MyTypedObject => { ... }
-```
 
 ### boolean utils
 
@@ -97,8 +81,8 @@ returns `true` iff value is `false | '' | 0 | null | undefined`
 ```TypeScript
 import { isFalsy } from 'typesafe-utils'
 
-const result = [true, false, 'text', 123].filter(isFalsy)
-// result: false[] => [false]
+const result = [true, false, 'text', 123, null].filter(isFalsy)
+// result: (false | null)[] => [false, null]
 ```
 
 ### isUndefined
@@ -165,6 +149,9 @@ const result = [true, 'some text', 1].filter(isTrue)
 
 returns `true` iff value is not `true`
 
+ > Note: it is currently not possible to make this function fully typesafe.\
+ > `[true, 123].filter(isNotTrue)` will have the type `(false | number)[]`
+
 #### Usage
 ```TypeScript
 import { isNotTrue } from 'typesafe-utils'
@@ -188,6 +175,9 @@ const result = [0, false, undefined].filter(isFalse)
 ### isNotFalse
 
 returns `true` iff value is not `false`
+
+ > Note: it is currently not possible to make this function fully typesafe.\
+ > `[false, 123].filter(isNotFalse)` will have the type `(true | number)[]`
 
 #### Usage
 ```TypeScript
@@ -213,12 +203,15 @@ const result = [0, false, undefined, 5].filter(isZero)
 
 returns `true` iff value is not `0`
 
+ > Note: it is currently not possible to make this function fully typesafe.\
+ > `[0, null].filter(isNotTrue)` will have the type `(number | null)[]`
+
 #### Usage
 ```TypeScript
 import { isNotZero } from 'typesafe-utils'
 
-const result = [0, false].filter(isNotZero)
-// result: boolean[] => [false]
+const result = [0, 123].filter(isNotZero)
+// result: number[] => [123]
 ```
 
 ### isEmpty
@@ -243,4 +236,20 @@ import { isNotEmpty } from 'typesafe-utils'
 
 const result = ['', 5].filter(isNotEmpty)
 // result: number[] => [5]
+```
+
+### deepClone
+
+Creates a deep copy of an object. Can also be used to copy primitive values.
+
+> Motivation: I have seen a variety of clone-functions that return any. There you would need to always specify the type by ourself. Using this function, you will get a correctly typed object back.
+
+#### Usage
+
+```TypeScript
+import { deepClone } from 'typesafe-utils'
+
+const objectToClone: MyTypedObject = { ... }
+const clonedObject = deepClone(objectToClone)
+// => clonedObject: MyTypedObject => { ... }
 ```
