@@ -2,6 +2,8 @@ export type Everything = {} | null | undefined
 
 type FalsyType = false | '' | 0 | null | undefined
 
+export type Is<T, U> = U extends T ? U : never
+
 export type Truthy<T> = T extends FalsyType ? never : T
 
 export type Falsy<T> = T extends FalsyType ? T : never

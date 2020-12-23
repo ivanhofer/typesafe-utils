@@ -2,7 +2,7 @@ A collection of a few small lighweight typesafe utilities.
 
 ## Motivation
 
-Sometimes you will encounter situations were the types will not match what you expect from a function. This means you need to explicitly specify a type by yourself to gain the full power of TypeScript.
+Sometimes you will encounter situations were the types will **not** match what you expect from a function. This means you need to explicitly specify a type by yourself to gain the full power of TypeScript.
 
 In this collection you will find some useful functions that are fully typed.
 
@@ -14,20 +14,46 @@ $ npm install --save-dev typesafe-utils
 
 ## Overview
  - [boolean utils](#boolean&#32;utils)
-    - [isTruthy](#isTruthy)
-    - [isFalsy](#isFalsy)
-    - [isUndefined](#isUndefined)
-    - [isNotUndefined](#isNotUndefined)
-    - [isNull](#isNull)
-    - [isNotNull](#isNotNull)
-    - [isTrue](#isTrue)
-    - [isNotTrue](#isNotTrue)
-    - [isFalse](#isFalse)
-    - [isNotFalse](#isNotFalse)
-    - [isZero](#isZero)
-    - [isNotZero](#isNotZero)
-    - [isEmpty](#isEmpty)
-    - [isNotEmpty](#isNotEmpty)
+    - is
+      - [is](#is)
+      - [isNot](#isNot)
+      - [isProperty](#isProperty)
+      - [isPropertyNot](#isPropertyNot)
+    - isTruthy
+      - [isTruthy](#isTruthy)
+      - [isFalsy](#isFalsy)
+      - [isPropertyTruthy](#isPropertyTruthy)
+      - [isPropertyFalsy](#isPropertyFalsy)
+    - isUndefined
+      - [isUndefined](#isUndefined)
+      - [isNotUndefined](#isNotUndefined)
+      - [isPropertyUndefined](#isPropertyUndefined)
+      - [isPropertyNotUndefined](#isPropertyNotUndefined)
+    - isNull
+      - [isNull](#isNull)
+      - [isNotNull](#isNotNull)
+      - [isPropertyNull](#isPropertyNull)
+      - [isPropertyNotNull](#isPropertyNotNull)
+    - isTrue
+      - [isTrue](#isTrue)
+      - [isNotTrue](#isNotTrue)
+      - [isPropertyTrue](#isPropertyTrue)
+      - [isPropertyNotTrue](#isPropertyNotTrue)
+    - isFalse
+      - [isFalse](#isFalse)
+      - [isNotFalse](#isNotFalse)
+      - [isPropertyFalse](#isPropertyFalse)
+      - [isPropertyNotFalse](#isPropertyNotFalse)
+    - isZero
+      - [isZero](#isZero)
+      - [isNotZero](#isNotZero)
+      - [isPropertyZero](#isPropertyZero)
+      - [isPropertyNotZero](#isPropertyNotZero)
+    - isEmpty
+      - [isEmpty](#isEmpty)
+      - [isNotEmpty](#isNotEmpty)
+      - [isPropertyEmpty](#isPropertyEmpty)
+      - [isPropertyNotEmpty](#isPropertyNotEmpty)
  - [filterDuplicates](#filterDuplicates)
  - [filterDuplicatesByKey](#filterDuplicatesByKey)
  - [deepClone](#deepClone)
@@ -36,9 +62,9 @@ $ npm install --save-dev typesafe-utils
 
 ### boolean utils
 
-A bunch of utilities that return true or false.
+A bunch of utilities that return true or false. Useful for array filter functions.
 
-> Motivation: When you filter an Array, the return type is not always what you expect. Typescript will tell you the result of a filter function is the exact type you pass to the filter function. But that is not always true. If you filter out falsy values, the return type should should not contain.
+> Motivation: When you filter an Array, the return type is **not** always what you expect. Typescript will tell you the result of a filter function is the exact type you pass to the filter function. But that is **not** always true. If you filter out falsy values, the return type should should **not** contain.
 
 ```TypeScript
 // BASIC example --------------------------------------------------------------
@@ -63,9 +89,77 @@ const typesafeResult = ['text', null, 'another text', undefined].filter(isNotEmp
 // => typesafeResult: string[] => ['text', 'another text']
 ```
 
+<!---------------------------------------------------------------------------->
+
+### is
+
+returns `true` iff value is equals to the property you pass to the function
+
+#### Usage
+```TypeScript
+import { is } from 'typesafe-utils'
+
+const result = [1, 15, 10, 43].filter(is(10))
+// result: number[] => [10]
+```
+
+### isNot
+
+returns `true` iff value is **not** equal to the property you pass to the function
+
+#### Usage
+```TypeScript
+import { isNot } from 'typesafe-utils'
+
+const result = ['text', 'forbidden', 'blabla'].filter(isNot('forbidden'))
+// result: string[] => ['text', 'blabla']
+```
+
+### isProperty
+
+returns `true` iff the attribute of the object equals the property you pass to the function
+
+#### Usage
+```TypeScript
+import { isProperty } from 'typesafe-utils'
+
+type Product = {
+   id: number
+}
+
+const items: Product[] = [
+   { id: 1 },
+   { id: 3 }
+]
+const result = items.filter(isProperty('id', 3))
+// result: Product[] => [{ id: 3 }]
+```
+
+### isPropertyNot
+
+returns `true` iff the attribute of the object is **not** equal to the property you pass to the function
+
+#### Usage
+```TypeScript
+import { isPropertyNot } from 'typesafe-utils'
+
+type Product = {
+   id: number
+}
+
+const items: Product[] = [
+   { id: 156 },
+   { id: 123 }
+]
+const result = items.filter(isPropertyNot('id', 123))
+// result: Product[] => [{ id: 156 }]
+```
+
+<!---------------------------------------------------------------------------->
+
 ### isTruthy
 
-returns `true` iff value is not `false | '' | 0 | null | undefined`
+returns `true` iff value is **not** `false | '' | 0 | null | undefined`
 
 #### Usage
 ```TypeScript
@@ -87,6 +181,49 @@ const result = [true, false, 'text', 123, null].filter(isFalsy)
 // result: (false | null)[] => [false, null]
 ```
 
+### isPropertyTruthy
+
+returns `true` iff the attribute of the object is truthy
+
+#### Usage
+```TypeScript
+import { isPropertyTruthy } from 'typesafe-utils'
+
+type Product = {
+   id: number
+}
+
+const items: Product[] = [
+   { id: 1 },
+   { id: null },
+   { id: undefined }
+]
+const result = items.filter(isPropertyTruthy('id'))
+// result: Product[] => [{ id: 1 }]
+```
+
+### isPropertyFalsy
+
+returns `true` iff the attribute of the object is falsy
+
+#### Usage
+```TypeScript
+import { isPropertyFalsy } from 'typesafe-utils'
+
+type Product = {
+   id: number
+}
+
+const items: Product[] = [
+   { id: 5 },
+   { id: null }
+]
+const result = items.filter(isPropertyFalsy('id'))
+// result: Product[] => [{ id: null }]
+```
+
+<!---------------------------------------------------------------------------->
+
 ### isUndefined
 
 returns `true` iff value is `undefined`
@@ -101,7 +238,7 @@ const result = [undefined, null, true].filter(isUndefined)
 
 ### isNotUndefined
 
-returns `true` iff value is not `undefined`
+returns `true` iff value is **not** `undefined`
 
 #### Usage
 ```TypeScript
@@ -110,6 +247,48 @@ import { isNotUndefined } from 'typesafe-utils'
 const result = [null, undefined].filter(isNotUndefined)
 // result: null[] => [null]
 ```
+
+### isPropertyUndefined
+
+returns `true` iff the attribute of the object is `undefined`
+
+#### Usage
+```TypeScript
+import { isPropertyUndefined } from 'typesafe-utils'
+
+type Product = {
+   id: number | undefined
+}
+
+const items: Product[] = [
+   { id: 1 },
+   { id: undefined }
+]
+const result = items.filter(isPropertyUndefined('id'))
+// result: Product[] => [{ id: undefined }]
+```
+
+### isPropertyNotUndefined
+
+returns `true` iff the attribute of the object is **not** `undefined`
+
+#### Usage
+```TypeScript
+import { isPropertyNotUndefined } from 'typesafe-utils'
+
+type Product = {
+   id: number
+}
+
+const items: Product[] = [
+   { id: 5 },
+   { id: undefined }
+]
+const result = items.filter(isPropertyNotUndefined('id'))
+// result: Product[] => [{ id: 5 }]
+```
+
+<!---------------------------------------------------------------------------->
 
 ### isNull
 
@@ -125,7 +304,7 @@ const result = [null, undefined].filter(isNull)
 
 ### isNotNull
 
-returns `true` iff value is not `null`
+returns `true` iff value is **not** `null`
 
 #### Usage
 ```TypeScript
@@ -134,6 +313,48 @@ import { isNotNull } from 'typesafe-utils'
 const result = [false, null].filter(isNotNull)
 // result: boolean[] => [false]
 ```
+
+### isPropertyNull
+
+returns `true` iff the attribute of the object is `null`
+
+#### Usage
+```TypeScript
+import { isPropertyNull } from 'typesafe-utils'
+
+type Product = {
+   id: number | null
+}
+
+const items: Product[] = [
+   { id: 0 },
+   { id: null }
+]
+const result = items.filter(isPropertyNull('id'))
+// result: Product[] => [{ id: null }]
+```
+
+### isPropertyNotNull
+
+returns `true` iff the attribute of the object is **not** `null`
+
+#### Usage
+```TypeScript
+import { isPropertyNotNull } from 'typesafe-utils'
+
+type Product = {
+   id: number
+}
+
+const items: Product[] = [
+   { id: 5 },
+   { id: null }
+]
+const result = items.filter(isPropertyNotNull('id'))
+// result: Product[] => [{ id: 5 }]
+```
+
+<!---------------------------------------------------------------------------->
 
 ### isTrue
 
@@ -149,9 +370,9 @@ const result = [true, 'some text', 1].filter(isTrue)
 
 ### isNotTrue
 
-returns `true` iff value is not `true`
+returns `true` iff value is **not** `true`
 
- > Note: it is currently not possible to make this function fully typesafe.\
+ > Note: it is currently **not** possible to make this function fully typesafe.\
  > `[true, 123].filter(isNotTrue)` will have the type `(false | number)[]`
 
 #### Usage
@@ -161,6 +382,48 @@ import { isNotTrue } from 'typesafe-utils'
 const result = [true, false].filter(isNotTrue)
 // result: false[] => [false]
 ```
+
+### isPropertyTrue
+
+returns `true` iff the attribute of the object is `true`
+
+#### Usage
+```TypeScript
+import { isPropertyTrue } from 'typesafe-utils'
+
+type Product = {
+   available: boolean | null
+}
+
+const items: Product[] = [
+   { available: true },
+   { available: null }
+]
+const result = items.filter(isPropertyTrue('available'))
+// result: Product[] => [{ available: true }]
+```
+
+### isPropertyNotTrue
+
+returns `true` iff the attribute of the object is **not** `true`
+
+#### Usage
+```TypeScript
+import { isPropertyNotTrue } from 'typesafe-utils'
+
+type Product = {
+   id: number
+}
+
+const items: Product[] = [
+   { available: true },
+   { available: false }
+]
+const result = items.filter(isPropertyNotTrue('available'))
+// result: Product[] => [{ available: false }]
+```
+
+<!---------------------------------------------------------------------------->
 
 ### isFalse
 
@@ -176,9 +439,9 @@ const result = [0, false, undefined].filter(isFalse)
 
 ### isNotFalse
 
-returns `true` iff value is not `false`
+returns `true` iff value is **not** `false`
 
- > Note: it is currently not possible to make this function fully typesafe.\
+ > Note: it is currently **not** possible to make this function fully typesafe.\
  > `[false, 123].filter(isNotFalse)` will have the type `(true | number)[]`
 
 #### Usage
@@ -188,6 +451,49 @@ import { isNotFalse } from 'typesafe-utils'
 const result = [false, null].filter(isNotFalse)
 // result: null[] => [null]
 ```
+
+### isPropertyFalse
+
+returns `true` iff the attribute of the object is `false`
+
+#### Usage
+```TypeScript
+import { isPropertyFalse } from 'typesafe-utils'
+
+type Product = {
+   available: boolean | null
+}
+
+const items: Product[] = [
+   { available: false },
+   { available: true },
+   { available: null }
+]
+const result = items.filter(isPropertyFalse('available'))
+// result: Product[] => [{ available: false }]
+```
+
+### isPropertyNotFalse
+
+returns `true` iff the attribute of the object is **not** `false`
+
+#### Usage
+```TypeScript
+import { isPropertyNotFalse } from 'typesafe-utils'
+
+type Product = {
+   id: number
+}
+
+const items: Product[] = [
+   { available: true },
+   { available: false }
+]
+const result = items.filter(isPropertyNotFalse('available'))
+// result: Product[] => [{ available: true }]
+```
+
+<!---------------------------------------------------------------------------->
 
 ### isZero
 
@@ -203,9 +509,9 @@ const result = [0, false, undefined, 5].filter(isZero)
 
 ### isNotZero
 
-returns `true` iff value is not `0`
+returns `true` iff value is **not** `0`
 
- > Note: it is currently not possible to make this function fully typesafe.\
+ > Note: it is currently **not** possible to make this function fully typesafe.\
  > `[0, null].filter(isNotTrue)` will have the type `(number | null)[]`
 
 #### Usage
@@ -215,6 +521,49 @@ import { isNotZero } from 'typesafe-utils'
 const result = [0, 123].filter(isNotZero)
 // result: number[] => [123]
 ```
+
+### isPropertyZero
+
+returns `true` iff the attribute of the object is `0`
+
+#### Usage
+```TypeScript
+import { isPropertyZero } from 'typesafe-utils'
+
+type Product = {
+   price: number
+}
+
+const items: Product[] = [
+   { price: 0 },
+   { price: 4 },
+   { price: 15 }
+]
+const result = items.filter(isPropertyZero('price'))
+// result: Product[] => [{ price: 0 }]
+```
+
+### isPropertyNotZero
+
+returns `true` iff the attribute of the object is **not** `0`
+
+#### Usage
+```TypeScript
+import { isPropertyNotZero } from 'typesafe-utils'
+
+type Product = {
+   price: number
+}
+
+const items: Product[] = [
+   { price: 0 },
+   { price: 12 }
+]
+const result = items.filter(isPropertyNotZero('price'))
+// result: Product[] => [{ price: 23 }]
+```
+
+<!---------------------------------------------------------------------------->
 
 ### isEmpty
 
@@ -230,7 +579,7 @@ const result = ['', false, null, 'text'].filter(isEmpty)
 
 ### isNotEmpty
 
-returns `true` iff value is not `''`
+returns `true` iff value is **not** `''`
 
 #### Usage
 ```TypeScript
@@ -239,6 +588,48 @@ import { isNotEmpty } from 'typesafe-utils'
 const result = ['', 5].filter(isNotEmpty)
 // result: number[] => [5]
 ```
+
+### isPropertyEmpty
+
+returns `true` iff the attribute of the object is `''`
+
+#### Usage
+```TypeScript
+import { isPropertyEmpty } from 'typesafe-utils'
+
+type Product = {
+   label: string
+}
+
+const items: Product[] = [
+   { label: '' },
+   { label: 'label-1' }
+]
+const result = items.filter(isPropertyEmpty('label'))
+// result: Product[] => [{ label: '' }]
+```
+
+### isPropertyNotEmpty
+
+returns `true` iff the attribute of the object is **not** `''`
+
+#### Usage
+```TypeScript
+import { isPropertyNotEmpty } from 'typesafe-utils'
+
+type Product = {
+   label: string
+}
+
+const items: Product[] = [
+   { label: 'label-123' },
+   { label: '' }
+]
+const result = items.filter(isPropertyNotEmpty('label'))
+// result: Product[] => [{ label: 'label-123' }]
+```
+
+<!---------------------------------------------------------------------------->
 
 ### filterDuplicates
 
@@ -280,8 +671,10 @@ import { filterDuplicates } from 'typesafe-utils'
 
 
    const willThrowAnError = items.filter(filterDuplicatesByKey('price'))
-   // throws: Argument of type '"price"' is not assignable to parameter of type '"id" | "name"'
+   // throws: Argument of type '"price"' is **not** assignable to parameter of type '"id" | "name"'
 ```
+
+<!---------------------------------------------------------------------------->
 
 ### deepClone
 

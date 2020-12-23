@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { isTruthy, isFalsy } from './isTruthy'
+import { isTruthy, isFalsy, isPropertyTruthy, isPropertyFalsy } from './isTruthy'
 
 const test = suite('truthy')
 
@@ -24,7 +24,22 @@ truthyValues.forEach((value) => test(`! isFalsy ${value}`, () => assert.not(isFa
 // const _allNotType: (null | undefined | '' | 0 | false)[] = [...truthyValues, ...falsyValues].filter(isFalsy)
 const _neverNotType: never[] = truthyValues.filter(isFalsy)
 
-// --------------------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------------------
+// isPropertyTruthy ---------------------------------------------------------------------------------------------------
+
+test(`isPropertyTruthy id`, () => {
+	const items = [{ id: 0 }, { id: 1 }, { id: null }]
+	const filteredItems = items.filter(isPropertyTruthy('id'))
+
+	assert.ok(filteredItems.length === 1)
+})
+
+// isPropertyFalsy ----------------------------------------------------------------------------------------------------
+
+test(`isPropertyFalsy id`, () => {
+	const items = [{ id: 0 }, { id: 1 }, { id: null }]
+	const filteredItems = items.filter(isPropertyFalsy('id'))
+
+	assert.ok(filteredItems.length === 2)
+})
 
 test.run()
