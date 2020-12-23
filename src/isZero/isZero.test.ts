@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { isZero, isNotZero } from '..'
 import { Everything } from '../types'
+import { isZero, isNotZero, isPropertyZero, isPropertyNotZero } from './isZero'
 
 const test = suite('zero')
 
@@ -23,5 +23,23 @@ zeroValues.forEach((value) => test(`! isNotZero ${value}`, () => assert.not(isNo
 
 const _allNotType: Exclude<Everything, true>[] = [...zeroValues, ...notZeroValues].filter(isNotZero)
 const _neverNotType: number[] = zeroValues.filter(isNotZero)
+
+// isPropertyZero ------------------------------------------------------------------------------------------------
+
+test(`isPropertyZero id`, () => {
+	const items = [{ id: 0 }, { id: undefined }, { id: null }]
+	const filteredItems = items.filter(isPropertyZero('id'))
+
+	assert.ok(filteredItems.length === 1)
+})
+
+// isPropertyNotZero ---------------------------------------------------------------------------------------------
+
+test(`isPropertyNotZero id`, () => {
+	const items = [{ id: 0 }, { id: 1 }, { id: null }]
+	const filteredItems = items.filter(isPropertyNotZero('id'))
+
+	assert.ok(filteredItems.length === 2)
+})
 
 test.run()
