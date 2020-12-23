@@ -27,6 +27,15 @@ jobs:
 
          - run: npm test
 
+         - run: npm run coverage
+
+         - run: npm run coverage:output-report
+
+         - uses: actions/upload-artifact@v2
+           with:
+              name: coverage-report
+              path: coverage-report.txt
+
          - run: npm run build
 
          - uses: JS-DevTools/npm-publish@v1

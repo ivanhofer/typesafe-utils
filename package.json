@@ -23,14 +23,18 @@
 		"lint": "eslint src",
 		"lint:fix": "eslint src --fix",
 		"test": "uvu -r ts-node/register src .*\\.test\\..*",
-		"test:watch": "watchlist src -- npm test"
+		"test:watch": "watchlist src -- npm test",
+		"coverage": "nyc npm run test",
+		"coverage:output-report": "nyc report > coverage-report.txt"
 	},
 	"devDependencies": {
+		"@istanbuljs/nyc-config-typescript": "^1.0.1",
 		"@typescript-eslint/eslint-plugin": "^4.10.0",
 		"@typescript-eslint/parser": "^4.10.0",
 		"eslint": "^7.16.0",
 		"eslint-config-prettier": "^7.1.0",
 		"eslint-plugin-prettier": "^3.3.0",
+		"nyc": "^15.1.0",
 		"prettier": "^2.2.1",
 		"ts-node": "^9.1.1",
 		"typescript": "^4.1.3",
