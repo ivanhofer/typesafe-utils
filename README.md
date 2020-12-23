@@ -28,6 +28,8 @@ $ npm install --save-dev typesafe-utils
     - [isNotZero](#isNotZero)
     - [isEmpty](#isEmpty)
     - [isNotEmpty](#isNotEmpty)
+ - [filterDuplicates](#filterDuplicates)
+ - [filterDuplicatesByKey](#filterDuplicatesByKey)
  - [deepClone](#deepClone)
 
 ## Utilities
@@ -236,6 +238,49 @@ import { isNotEmpty } from 'typesafe-utils'
 
 const result = ['', 5].filter(isNotEmpty)
 // result: number[] => [5]
+```
+
+### filterDuplicates
+
+Removes duplicates from an array. Only the first occurrence of an item will be kept.
+
+#### Usage
+
+```TypeScript
+import { filterDuplicates } from 'typesafe-utils'
+
+const items = [1, 2, 3, 5, 8, 1]
+const filteredItems = items.filter(filterDuplicates)
+// filteredItems: number[] => [1, 2, 3, 5, 8]
+```
+
+### filterDuplicatesByKey
+
+Removes duplicates from an array by its key. Only the first occurrence of an item will be kept.
+
+> Motivation: It is less error-prone if you can only pass the keys an object provides to a filter function. With this function you get full types support.
+
+#### Usage
+
+```TypeScript
+import { filterDuplicates } from 'typesafe-utils'
+   type Product = {
+      id: number
+      name: string
+   }
+
+	const items: Product[] = [
+		{ id: 1, name: 'name-1' },
+		{ id: 2, name: 'name-2' },
+		{ id: 3, name: 'name-1' },
+		{ id: 4, name: 'name-2' },
+	]
+	const filteredItems = items.filter(filterDuplicatesByKey('name'))
+   // filteredItems: Product[] => [{ id: 1, name: 'name-1' }, { id: 2, name: 'name-2' }]
+
+
+   const willThrowAnError = items.filter(filterDuplicatesByKey('price'))
+   // throws: Argument of type '"price"' is not assignable to parameter of type '"id" | "name"'
 ```
 
 ### deepClone
