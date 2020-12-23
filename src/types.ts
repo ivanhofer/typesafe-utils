@@ -1,3 +1,5 @@
+export type Everything = {} | null | undefined
+
 type FalsyType = false | '' | 0 | null | undefined
 
 export type Truthy<T> = T extends FalsyType ? never : T
@@ -22,7 +24,7 @@ export type NotFalse<T> = T extends false ? never : T
 
 export type Zero<T> = T extends number ? 0 : never
 
-export type NotZero<T> = T extends number ? never : T
+export type NotZero<T> = T extends 0 ? never : T
 
 export type Empty<T> = T extends string ? '' : never
 
