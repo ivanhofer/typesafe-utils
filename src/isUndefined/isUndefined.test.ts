@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { isUndefined, isNotUndefined } from './isUndefined'
+import { isUndefined, isNotUndefined, isPropertyUndefined, isPropertyNotUndefined } from './isUndefined'
 
 const test = suite('undefined')
 
@@ -23,5 +23,23 @@ undefinedValues.forEach((value) => test(`! isNotUndefined ${value}`, () => asser
 
 const _allNotType: ({} | null)[] = [...undefinedValues, ...notUndefinedValues].filter(isNotUndefined)
 const _neverNotType: never[] = undefinedValues.filter(isNotUndefined)
+
+// isPropertyUndefined ------------------------------------------------------------------------------------------------
+
+test(`isPropertyUndefined id`, () => {
+	const items = [{ id: 0 }, { id: undefined }, { id: null }]
+	const filteredItems = items.filter(isPropertyUndefined('id'))
+
+	assert.ok(filteredItems.length === 1)
+})
+
+// isPropertyNotUndefined ---------------------------------------------------------------------------------------------
+
+test(`isPropertyNotUndefined id`, () => {
+	const items = [{ id: undefined }, { id: 1 }, { id: null }]
+	const filteredItems = items.filter(isPropertyNotUndefined('id'))
+
+	assert.ok(filteredItems.length === 2)
+})
 
 test.run()

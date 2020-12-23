@@ -33,25 +33,11 @@ test(`isPropertyTruthy id`, () => {
 	assert.ok(filteredItems.length === 1)
 })
 
-test(`isPropertyTruthy name`, () => {
-	const items = [{ name: 'name-1' }, { name: undefined }, { name: '' }]
-	const filteredItems = items.filter(isPropertyTruthy('name'))
-
-	assert.ok(filteredItems.length === 1)
-})
-
 // isPropertyFalsy ----------------------------------------------------------------------------------------------------
 
 test(`isPropertyFalsy id`, () => {
 	const items = [{ id: 0 }, { id: 1 }, { id: null }]
 	const filteredItems = items.filter(isPropertyFalsy('id'))
-
-	assert.ok(filteredItems.length === 2)
-})
-
-test(`isPropertyFalsy name`, () => {
-	const items = [{ name: 'name-1' }, { name: undefined }, { name: '' }]
-	const filteredItems = items.filter(isPropertyFalsy('name'))
 
 	assert.ok(filteredItems.length === 2)
 })
