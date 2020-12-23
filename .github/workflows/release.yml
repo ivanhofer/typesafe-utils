@@ -18,18 +18,20 @@ jobs:
 
          - run: npm install
 
-         - run: npm test
+         - name: run test
+           run: npm test
 
          - run: npm run coverage
 
-         - run: npm run coverage:output-report
-
+         - name: output test coverage
+           run: npm run coverage:output-report
          - uses: actions/upload-artifact@v2
            with:
               name: coverage-report
               path: coverage-report.txt
 
-         - run: npm run build
+         - name: build package
+           run: npm run build
 
          - name: bump version and create tag
            uses: 'phips28/gh-action-bump-version@master'
@@ -38,6 +40,7 @@ jobs:
            with:
               minor-wording: 'feat,feature'
 
-         - uses: JS-DevTools/npm-publish@v1
+         - name: publish to npm
+           uses: JS-DevTools/npm-publish@v1
            with:
               token: ${{ secrets.NPM_TOKEN }}
