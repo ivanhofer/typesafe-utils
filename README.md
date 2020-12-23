@@ -13,7 +13,7 @@ $ npm install --save-dev typesafe-utils
 ```
 
 ## Overview
- - [boolean utils](#boolean\ utils)
+ - [boolean utils](#boolean&#32;utils)
     - [isTruthy](#isTruthy)
     - [isFalsy](#isFalsy)
     - [isUndefined](#isUndefined)
