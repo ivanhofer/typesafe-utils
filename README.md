@@ -14,6 +14,8 @@ $ npm install --save-dev typesafe-utils
 
 ## Overview
  - [boolean utils](#boolean&#32;utils)
+    - [is](#is)
+    - [isNot](#isNot)
     - [isTruthy](#isTruthy)
     - [isFalsy](#isFalsy)
     - [isUndefined](#isUndefined)
@@ -61,6 +63,30 @@ const result = ['text', null, 'another text', undefined].filter(value => value !
 import { isNotEmpty } from 'typesafe-utils'
 const typesafeResult = ['text', null, 'another text', undefined].filter(isNotEmpty)
 // => typesafeResult: string[] => ['text', 'another text']
+```
+
+### is
+
+returns `true` iff value is equals to the property you pass to the function
+
+#### Usage
+```TypeScript
+import { is } from 'typesafe-utils'
+
+const result = [1, 15, 10, 43].filter(is(10))
+// result: number[] => [10]
+```
+
+### isNot
+
+returns `true` iff value is not equal to the property you pass to the function
+
+#### Usage
+```TypeScript
+import { is } from 'typesafe-utils'
+
+const result = ['text', 'forbidden', 'blabla'].filter(is('forbidden'))
+// result: string[] => ['text', 'blabla']
 ```
 
 ### isTruthy
