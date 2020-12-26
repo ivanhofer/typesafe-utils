@@ -10,3 +10,18 @@ export { isTrue, isNotTrue, isPropertyTrue, isPropertyNotTrue } from './isTrue/i
 export { isTruthy, isFalsy, isPropertyTruthy, isPropertyFalsy } from './isTruthy/isTruthy'
 export { isUndefined, isNotUndefined, isPropertyUndefined, isPropertyNotUndefined } from './isUndefined/isUndefined'
 export { isZero, isNotZero, isPropertyZero, isPropertyNotZero } from './isZero/isZero'
+
+export {
+	sortNumberASC,
+	sortNumberDESC,
+	sortNumberPropertyASC,
+	sortNumberPropertyDESC,
+	sortStringASC,
+	sortStringDESC,
+	sortStringPropertyASC,
+	sortStringPropertyDESC,
+	sortDateASC,
+	sortDateDESC,
+	sortDatePropertyASC,
+	sortDatePropertyDESC,
+} from './sorting/sorting'
