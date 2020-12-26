@@ -13,7 +13,7 @@ $ npm install --save-dev typesafe-utils
 ```
 
 ## Overview
- - [boolean utils](#boolean&#32;utils)
+ - [filter functions](#filter&#32;functions)
     - is
       - [is](#is)
       - [isNot](#isNot)
@@ -54,6 +54,10 @@ $ npm install --save-dev typesafe-utils
       - [isNotEmpty](#isNotEmpty)
       - [isPropertyEmpty](#isPropertyEmpty)
       - [isPropertyNotEmpty](#isPropertyNotEmpty)
+    - duplicates
+      - [filterDuplicates](#filterDuplicates)
+      - [filterDuplicatesByKey](#filterDuplicatesByKey)
+
  - [sorting functions](#sorting&#32;functions)
     - number
       - [sortNumberASC](#sortNumberASC)
@@ -70,13 +74,11 @@ $ npm install --save-dev typesafe-utils
       - [sortDateDESC](#sortDateDESC)
       - [sortDatePropertyASC](#sortDatePropertyASC)
       - [sortDatePropertyDESC](#sortDatePropertyDESC)
- - [filterDuplicates](#filterDuplicates)
- - [filterDuplicatesByKey](#filterDuplicatesByKey)
- - [deepClone](#deepClone)
 
-## Utilities
+ - [other](#other)
+   - [deepClone](#deepClone)
 
-### boolean utils
+## filter functions
 
 A bunch of utilities that return true or false. Useful for array filter functions.
 
@@ -648,7 +650,7 @@ const result = items.filter(isPropertyNotEmpty('label'))
 
 <!---------------------------------------------------------------------------->
 
-### sorting functions
+## sorting functions
 
 ### sortNumberASC
 
@@ -864,7 +866,6 @@ const result = items.sort(sortDatePropertyDESC)
 // result: Smartphone[] => [{ releaseDate: tomorrow }, { releaseDate: today }]
 ```
 
-
 <!---------------------------------------------------------------------------->
 
 ### filterDuplicates
@@ -911,6 +912,8 @@ const willThrowAnError = items.filter(filterDuplicatesByKey('price'))
 ```
 
 <!---------------------------------------------------------------------------->
+
+## other
 
 ### deepClone
 
