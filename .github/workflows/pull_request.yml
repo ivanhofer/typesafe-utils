@@ -1,0 +1,23 @@
+name: run lint and tests
+
+on:
+   pull_request:
+      types: [opened, synchronize]
+
+jobs:
+   tests:
+      runs-on: ubuntu-latest
+      steps:
+         - uses: actions/checkout@v2
+
+         - uses: actions/setup-node@v1
+           with:
+              node-version: 10
+
+         - run: npm install
+
+         - run: npm run lint
+
+         - run: npm test
+
+         - run: npm run build
