@@ -13,7 +13,7 @@ $ npm install --save-dev typesafe-utils
 ```
 
 ## Overview
- - [boolean utils](#boolean&#32;utils)
+ - [filter functions](#filter&#32;functions)
     - is
       - [is](#is)
       - [isNot](#isNot)
@@ -54,13 +54,31 @@ $ npm install --save-dev typesafe-utils
       - [isNotEmpty](#isNotEmpty)
       - [isPropertyEmpty](#isPropertyEmpty)
       - [isPropertyNotEmpty](#isPropertyNotEmpty)
- - [filterDuplicates](#filterDuplicates)
- - [filterDuplicatesByKey](#filterDuplicatesByKey)
- - [deepClone](#deepClone)
+    - duplicates
+      - [filterDuplicates](#filterDuplicates)
+      - [filterDuplicatesByKey](#filterDuplicatesByKey)
 
-## Utilities
+ - [sorting functions](#sorting&#32;functions)
+    - number
+      - [sortNumberASC](#sortNumberASC)
+      - [sortNumberDESC](#sortNumberDESC)
+      - [sortNumberPropertyASC](#sortNumberPropertyASC)
+      - [sortNumberPropertyDESC](#sortNumberPropertyDESC)
+    - string
+      - [sortStringASC](#sortStringASC)
+      - [sortStringDESC](#sortStringDESC)
+      - [sortStringPropertyASC](#sortStringPropertyASC)
+      - [sortStringPropertyDESC](#sortStringPropertyDESC)
+    - date
+      - [sortDateASC](#sortDateASC)
+      - [sortDateDESC](#sortDateDESC)
+      - [sortDatePropertyASC](#sortDatePropertyASC)
+      - [sortDatePropertyDESC](#sortDatePropertyDESC)
 
-### boolean utils
+ - [other](#other)
+   - [deepClone](#deepClone)
+
+## filter functions
 
 A bunch of utilities that return true or false. Useful for array filter functions.
 
@@ -629,6 +647,225 @@ const result = items.filter(isPropertyNotEmpty('label'))
 // result: Product[] => [{ label: 'label-123' }]
 ```
 
+
+<!---------------------------------------------------------------------------->
+
+## sorting functions
+
+### sortNumberASC
+
+sort `number` in **ASC** order
+
+#### Usage
+```TypeScript
+import { sortNumberASC } from 'typesafe-utils'
+
+const items = [4, -1, 3, 0]
+const result = items.sort(sortNumberASC)
+// result: number[] => [-1, 0, 3, 4]
+```
+
+### sortNumberDESC
+
+sort `number` in **DESC** order
+
+#### Usage
+```TypeScript
+import { sortNumberDESC } from 'typesafe-utils'
+
+const items = [2, -5, 0]
+const result = items.sort(sortNumberDESC)
+// result: number[] => [2, 0, -5]
+```
+
+### sortNumberPropertyASC
+
+sort property of type `number` in **ASC** order
+
+#### Usage
+```TypeScript
+import { sortNumberPropertyASC } from 'typesafe-utils'
+
+type Car {
+   speed: number
+}
+
+const items: Car[] = [
+   { speed: 113 },
+   { speed: 100 },
+   { speed: 95 }
+]
+const result = items.sort(sortNumberPropertyASC)
+// result: Car[] => [{ speed: 95 }, { speed: 100 }, { speed: 113 }}
+```
+
+### sortNumberPropertyDESC
+
+sort property of type `number` in **DESC** order
+
+#### Usage
+```TypeScript
+import { sortNumberPropertyDESC } from 'typesafe-utils'
+
+type Car {
+   speed: number
+}
+
+const items: Car[] = [
+   { speed: 70 }
+   { speed: 87 }
+]
+const result = items.sort(sortNumberPropertyDESC('speed'))
+// result: Car[] => [{ speed: 87 }, { speed: 70 }]
+```
+
+### sortStringASC
+
+sort `string` in **ASC** order
+
+#### Usage
+```TypeScript
+import { sortStringASC } from 'typesafe-utils'
+
+const items = ['Hi', 'apples']
+const result = items.sort(sortStringASC)
+// result: string[] => ['apples', Hi']
+```
+
+### sortStringDESC
+
+sort `string` in **DESC** order
+
+#### Usage
+```TypeScript
+import { sortStringDESC } from 'typesafe-utils'
+
+const items = ['apple', 'banana']
+const result = items.sort(sortStringDESC)
+// result: string[] => ['banana', 'apple']
+```
+
+### sortStringPropertyASC
+
+sort property of type `string` in **ASC** order
+
+#### Usage
+```TypeScript
+import { sortStringPropertyASC } from 'typesafe-utils'
+
+type Car {
+   color: string
+}
+
+const items: Car[] = [
+   { color: 'green' },
+   { color: 'brown' }
+]
+
+const result = items.sort(sortStringPropertyASC)
+// result: Car[] => [{ color: 'brown' }, { color: 'green' }]
+```
+
+### sortStringPropertyDESC
+
+sort property of type `string` in **DESC** order
+
+#### Usage
+```TypeScript
+import { sortStringPropertyDESC } from 'typesafe-utils'
+
+type Car {
+   color: string
+}
+
+const items: Car[] = [
+   { color: 'red' },
+   { color: 'blue' }
+]
+const result = items.sort(sortStringPropertyDESC)
+// result: Car[] => [{ color: 'red' }, { color: 'blue' }]
+```
+
+### sortDateASC
+
+sort `Date` in **ASC** order
+
+#### Usage
+```TypeScript
+import { sortDateASC } from 'typesafe-utils'
+
+const today = new Date()
+const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000)
+
+const items = [tomorrow, today]
+const result = items.sort(sortDateASC)
+// result: Date[] => [today, tomorrow]
+```
+
+### sortDateDESC
+
+sort `Date` in **DESC** order
+
+#### Usage
+```TypeScript
+import { sortDateDESC } from 'typesafe-utils'
+
+const today = new Date()
+const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000)
+
+const items = [today, tomorrow]
+const result = items.sort(sortDateDESC)
+// result: Date[] => [tomorrow, today]
+```
+
+### sortDatePropertyASC
+
+sort property of type `Date` in **ASC** order
+
+#### Usage
+```TypeScript
+import { sortDatePropertyASC } from 'typesafe-utils'
+
+type Smartphone = {
+   releaseDate: Date
+}
+
+const today = new Date()
+const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000)
+
+const items: Smartphone[] = [
+   { releaseDate: tomorrow },
+   { releaseDate: today }
+]
+
+const items: Smartphone[] = []
+const result = items.sort(sortDatePropertyASC)
+// result: Smartphone[]=> [{ releaseDate: today }, { releaseDate: tomorrow }]
+```
+
+### sortDatePropertyDESC
+
+sort property of type `Date` in **DESC** order
+
+#### Usage
+```TypeScript
+import { sortDatePropertyDESC } from 'typesafe-utils'
+
+type Smartphone = {
+   releaseDate: Date
+}
+
+const today = new Date()
+const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000)
+
+const items: Smartphone[] = [
+   { releaseDate: today },
+   { releaseDate: tomorrow }
+]
+const result = items.sort(sortDatePropertyDESC)
+// result: Smartphone[] => [{ releaseDate: tomorrow }, { releaseDate: today }]
+```
+
 <!---------------------------------------------------------------------------->
 
 ### filterDuplicates
@@ -655,26 +892,28 @@ Removes duplicates from an array by its key. Only the first occurrence of an ite
 
 ```TypeScript
 import { filterDuplicates } from 'typesafe-utils'
-   type Product = {
-      id: number
-      name: string
-   }
+type Product = {
+   id: number
+   name: string
+}
 
-	const items: Product[] = [
-		{ id: 1, name: 'name-1' },
-		{ id: 2, name: 'name-2' },
-		{ id: 3, name: 'name-1' },
-		{ id: 4, name: 'name-2' },
-	]
-	const filteredItems = items.filter(filterDuplicatesByKey('name'))
-   // filteredItems: Product[] => [{ id: 1, name: 'name-1' }, { id: 2, name: 'name-2' }]
+const items: Product[] = [
+   { id: 1, name: 'name-1' },
+   { id: 2, name: 'name-2' },
+   { id: 3, name: 'name-1' },
+   { id: 4, name: 'name-2' }
+]
+const filteredItems = items.filter(filterDuplicatesByKey('name'))
+// filteredItems: Product[] => [{ id: 1, name: 'name-1' }, { id: 2, name: 'name-2' }]
 
 
-   const willThrowAnError = items.filter(filterDuplicatesByKey('price'))
-   // throws: Argument of type '"price"' is **not** assignable to parameter of type '"id" | "name"'
+const willThrowAnError = items.filter(filterDuplicatesByKey('price'))
+// throws: Argument of type '"price"' is **not** assignable to parameter of type '"id" | "name"'
 ```
 
 <!---------------------------------------------------------------------------->
+
+## other
 
 ### deepClone
 
