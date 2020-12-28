@@ -28,3 +28,4 @@ export {
 
 export { isObject } from './isObject/isObject'
 export { isString } from './isString/isString'
+export { isNumber } from './isNumber/isNumber'
