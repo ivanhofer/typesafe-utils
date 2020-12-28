@@ -955,7 +955,7 @@ const result = items.sort(sortDatePropertyDESC)
 
 ### deepClone
 
-Creates a deep copy of an object. Can also be used to copy primitive values.
+Creates a deep copy of an object containing primitive values.
 
 > Motivation: I have seen a variety of clone-functions that return any. There you would need to always specify the type by ourself. Using this function, you will get a correctly typed object back.
 
