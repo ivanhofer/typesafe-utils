@@ -25,3 +25,5 @@ export {
 	sortDatePropertyASC,
 	sortDatePropertyDESC,
 } from './sorting/sorting'
+
+export { isObject } from './isObject/isObject'
