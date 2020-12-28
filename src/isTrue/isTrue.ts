@@ -1,4 +1,6 @@
-import { True, NotTrue } from '../types'
+type True<T> = T extends true ? T : never
+
+type NotTrue<T> = T extends true ? never : T
 
 export const isTrue = <T>(value: T): value is True<T> => <unknown>value === true
 

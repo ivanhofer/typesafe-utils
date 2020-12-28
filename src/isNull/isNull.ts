@@ -1,4 +1,6 @@
-import { Null, NotNull } from '../types'
+type Null<T> = T extends null ? T : never
+
+type NotNull<T> = T extends null ? never : T
 
 export const isNull = <T>(value: T): value is Null<T> => value === null
 
