@@ -1,4 +1,6 @@
-import type { Empty, NotEmpty } from '../types'
+type Empty<T> = T extends string ? '' : never
+
+type NotEmpty<T> = T extends string ? never : T
 
 export const isEmpty = <T>(value: T | ''): value is Empty<T> => <unknown>value === ''
 

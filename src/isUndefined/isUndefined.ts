@@ -1,4 +1,6 @@
-import { Undefined, NotUndefined } from '../types'
+type Undefined<T> = T extends undefined ? T : never
+
+type NotUndefined<T> = T extends undefined ? never : T
 
 export const isUndefined = <T>(value: T): value is Undefined<T> => value === undefined
 
