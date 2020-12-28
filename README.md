@@ -1,4 +1,4 @@
-A collection of a few small lighweight typesafe utilities.
+A collection of a few small lightweight typesafe utilities.
 
 ## Motivation
 
