@@ -57,6 +57,8 @@ $ npm install --save-dev typesafe-utils
     - duplicates
       - [filterDuplicates](#filterDuplicates)
       - [filterDuplicatesByKey](#filterDuplicatesByKey)
+    - other
+      - [invert](#invert)
 
  - [sorting functions](#sorting&#32;functions)
     - number
@@ -650,6 +652,86 @@ const result = items.filter(isPropertyNotEmpty('label'))
 
 <!---------------------------------------------------------------------------->
 
+### filterDuplicates
+
+Removes duplicates from an array. Only the first occurrence of an item will be kept.
+
+#### Usage
+
+```TypeScript
+import { filterDuplicates } from 'typesafe-utils'
+
+const items = [1, 2, 3, 5, 8, 1]
+const filteredItems = items.filter(filterDuplicates)
+// filteredItems: number[] => [1, 2, 3, 5, 8]
+```
+
+### filterDuplicatesByKey
+
+Removes duplicates from an array by its key. Only the first occurrence of an item will be kept.
+
+> Motivation: It is less error-prone if you can only pass the keys an object provides to a filter function. With this function you get full types support.
+
+#### Usage
+
+```TypeScript
+import { filterDuplicatesByKey } from 'typesafe-utils'
+
+type Product = {
+   id: number
+   name: string
+}
+
+const items: Product[] = [
+   { id: 1, name: 'name-1' },
+   { id: 2, name: 'name-2' },
+   { id: 3, name: 'name-1' },
+   { id: 4, name: 'name-2' }
+]
+const filteredItems = items.filter(filterDuplicatesByKey('name'))
+// filteredItems: Product[] => [{ id: 1, name: 'name-1' }, { id: 2, name: 'name-2' }]
+
+
+const willThrowAnError = items.filter(filterDuplicatesByKey('price'))
+// throws: Argument of type '"price"' is **not** assignable to parameter of type '"id" | "name"'
+```
+
+### invert
+
+Inverts a filter function.
+
+#### Usage
+
+```TypeScript
+import { invert, filterDuplicates } from 'typesafe-utils'
+
+type Product = {
+   id: number
+   name: string
+}
+
+const items: Product[] = [
+   { id: 1, name: 'name-1' },
+   { id: 2, name: 'name-2' },
+   { id: 3, name: 'name-1' },
+   { id: 4, name: 'name-2' }
+]
+const filteredItems = items.filter(invert<Product>(filterDuplicatesByKey('name')))
+// filteredItems: Product[] => [{ id: 3, name: 'name-1' }, { id: 4, name: 'name-2' }]
+
+
+// The `ìnvert` function takes two optional type arguments.
+// The first is the Type of the Array you want to filter.
+// The second is the type you expect the filter function to return.
+// e.g.
+const notNull = [1, 5, null].filter<number | null, number>(invert((value => value === null)))
+// notNull: number[] => [1, 5]
+
+```
+
+
+<!---------------------------------------------------------------------------->
+
 ## sorting functions
 
 ### sortNumberASC
@@ -866,50 +948,6 @@ const result = items.sort(sortDatePropertyDESC)
 // result: Smartphone[] => [{ releaseDate: tomorrow }, { releaseDate: today }]
 ```
 
-<!---------------------------------------------------------------------------->
-
-### filterDuplicates
-
-Removes duplicates from an array. Only the first occurrence of an item will be kept.
-
-#### Usage
-
-```TypeScript
-import { filterDuplicates } from 'typesafe-utils'
-
-const items = [1, 2, 3, 5, 8, 1]
-const filteredItems = items.filter(filterDuplicates)
-// filteredItems: number[] => [1, 2, 3, 5, 8]
-```
-
-### filterDuplicatesByKey
-
-Removes duplicates from an array by its key. Only the first occurrence of an item will be kept.
-
-> Motivation: It is less error-prone if you can only pass the keys an object provides to a filter function. With this function you get full types support.
-
-#### Usage
-
-```TypeScript
-import { filterDuplicates } from 'typesafe-utils'
-type Product = {
-   id: number
-   name: string
-}
-
-const items: Product[] = [
-   { id: 1, name: 'name-1' },
-   { id: 2, name: 'name-2' },
-   { id: 3, name: 'name-1' },
-   { id: 4, name: 'name-2' }
-]
-const filteredItems = items.filter(filterDuplicatesByKey('name'))
-// filteredItems: Product[] => [{ id: 1, name: 'name-1' }, { id: 2, name: 'name-2' }]
-
-
-const willThrowAnError = items.filter(filterDuplicatesByKey('price'))
-// throws: Argument of type '"price"' is **not** assignable to parameter of type '"id" | "name"'
-```
 
 <!---------------------------------------------------------------------------->
 
@@ -917,7 +955,7 @@ const willThrowAnError = items.filter(filterDuplicatesByKey('price'))
 
 ### deepClone
 
-Creates a deep copy of an object. Can also be used to copy primitive values.
+Creates a deep copy of an object containing primitive values.
 
 > Motivation: I have seen a variety of clone-functions that return any. There you would need to always specify the type by ourself. Using this function, you will get a correctly typed object back.
 
