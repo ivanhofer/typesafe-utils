@@ -6,9 +6,9 @@ const test = suite('isObject')
 
 // isObject -----------------------------------------------------------------------------------------------------------
 
-test(`isObject`, () => {
-	const items = ['test', { prop: 0 }, null, undefined, true, {}, 0, 123, false, '']
+const items = ['test', { prop: 0 }, null, undefined, true, {}, 0, 123, false, '']
 
+test(`isObject`, () => {
 	const filteredItems = items.filter(isObject)
 
 	assert.ok(filteredItems.length === 2)
@@ -16,7 +16,7 @@ test(`isObject`, () => {
 	assert.equal(filteredItems[1], {})
 })
 
-const onlyObjects = [null, 123, { prop: 0 }].filter(isObject)
+const onlyObjects = items.filter(isObject)
 onlyObjects[0] && onlyObjects[0].prop
 
 test.run()

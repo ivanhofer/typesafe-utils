@@ -6,9 +6,9 @@ const test = suite('isNumber')
 
 // isNumber -----------------------------------------------------------------------------------------------------------
 
-test(`isNumber`, () => {
-	const items = ['test', { prop: 0 }, null, undefined, true, {}, 0, 123, false, '']
+const items = ['test', { prop: 0 }, null, undefined, true, {}, 0, 123, false, '']
 
+test(`isNumber`, () => {
 	const filteredItems = items.filter(isNumber)
 
 	assert.ok(filteredItems.length === 2)
@@ -16,7 +16,7 @@ test(`isNumber`, () => {
 	assert.is(filteredItems[1], 123)
 })
 
-const onlyNumbers = [null, 123, { prop: 0 }, 'hello', 'test'].filter(isNumber)
+const onlyNumbers = items.filter(isNumber)
 onlyNumbers[0] && onlyNumbers[0].toFixed()
 
 test.run()
