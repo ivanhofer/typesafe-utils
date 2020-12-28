@@ -1,5 +1,9 @@
 export type Everything = {} | null | undefined
 
+export type FilterFn<T, U extends T = T> =
+	| ((value: T, i: number, all: T[]) => boolean)
+	| ((value: T, i: number, all: T[]) => value is U)
+
 type FalsyType = false | '' | 0 | null | undefined
 
 export type Is<T, U> = U extends T ? U : never
