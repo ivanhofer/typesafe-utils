@@ -66,8 +66,10 @@ $ npm install --save-dev typesafe-utils
     - duplicates
       - [filterDuplicates](#filterDuplicates)
       - [filterDuplicatesByKey](#filterDuplicatesByKey)
-    - other
-      - [invert](#invert)
+    - logical operators
+      - [and](#and)
+      - [or](#or)
+      - [not](#not)
 
  - [sorting functions](#sorting&#32;functions)
     - number
@@ -775,14 +777,45 @@ const willThrowAnError = items.filter(filterDuplicatesByKey('price'))
 // throws: Argument of type '"price"' is **not** assignable to parameter of type '"id" | "name"'
 ```
 
-### invert
+### and
+
+Combines (`&&`) multiple filter functions.
+
+#### Usage
+
+```TypeScript
+import { and, isString, filterDuplicates } from 'typesafe-utils'
+
+const items = [null, "test", undefined, "hi"]
+const isShortString = and<any, string>(isString, (value) => value.length < 3)
+const filteredItems = items.filter(isShortString)
+// filteredItems: string[] => ['hi']
+```
+
+### or
+
+Combines (`||`) multiple filter functions.
+
+#### Usage
+
+```TypeScript
+import { or, filterDuplicates } from 'typesafe-utils'
+
+const items = [10, 2, 3, 5, 8, 1]
+const isFiveOrTen = or((value) => value === 5, (value) => value === 10)
+const filteredItems = items.filter(isFiveOrTen)
+// filteredItems: number[] => [10, 5]
+```
+
+
+### not
 
 Inverts a filter function.
 
 #### Usage
 
 ```TypeScript
-import { invert, filterDuplicates } from 'typesafe-utils'
+import { not, filterDuplicates } from 'typesafe-utils'
 
 type Product = {
    id: number
@@ -795,15 +828,15 @@ const items: Product[] = [
    { id: 3, name: 'name-1' },
    { id: 4, name: 'name-2' }
 ]
-const filteredItems = items.filter(invert<Product>(filterDuplicatesByKey('name')))
+const filteredItems = items.filter(not<Product>(filterDuplicatesByKey('name')))
 // filteredItems: Product[] => [{ id: 3, name: 'name-1' }, { id: 4, name: 'name-2' }]
 
 
-// The `ìnvert` function takes two optional type arguments.
+// The `not` function takes two optional type arguments.
 // The first is the Type of the Array you want to filter.
 // The second is the type you expect the filter function to return.
 // e.g.
-const notNull = [1, 5, null].filter<number | null, number>(invert((value => value === null)))
+const notNull = [1, 5, null].filter<number | null, number>(not((value => value === null)))
 // notNull: number[] => [1, 5]
 
 ```
