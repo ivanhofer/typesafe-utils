@@ -25,3 +25,5 @@ export {
 	sortDatePropertyASC,
 	sortDatePropertyDESC,
 } from './sorting/sorting'
+
+export { invert } from './invert/invert'
