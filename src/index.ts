@@ -26,4 +26,9 @@ export {
 	sortDatePropertyDESC,
 } from './sorting/sorting'
 
+export { isObject, isPrimitiveObject } from './isObject/isObject'
+export { isString } from './isString/isString'
+export { isNumber } from './isNumber/isNumber'
+export { isBoolean } from './isBoolean/isBoolean'
+
 export { invert } from './invert/invert'

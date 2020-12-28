@@ -1,4 +1,4 @@
-import { Is } from '../types'
+type Is<T, U> = U extends T ? U : never
 
 export const is = <T, U>(item: T) => (value: U): value is Is<T, U> => <unknown>value === item
 

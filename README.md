@@ -34,26 +34,35 @@ $ npm install --save-dev typesafe-utils
       - [isNotNull](#isNotNull)
       - [isPropertyNull](#isPropertyNull)
       - [isPropertyNotNull](#isPropertyNotNull)
-    - isTrue
-      - [isTrue](#isTrue)
-      - [isNotTrue](#isNotTrue)
-      - [isPropertyTrue](#isPropertyTrue)
-      - [isPropertyNotTrue](#isPropertyNotTrue)
-    - isFalse
-      - [isFalse](#isFalse)
-      - [isNotFalse](#isNotFalse)
-      - [isPropertyFalse](#isPropertyFalse)
-      - [isPropertyNotFalse](#isPropertyNotFalse)
-    - isZero
-      - [isZero](#isZero)
-      - [isNotZero](#isNotZero)
-      - [isPropertyZero](#isPropertyZero)
-      - [isPropertyNotZero](#isPropertyNotZero)
-    - isEmpty
-      - [isEmpty](#isEmpty)
-      - [isNotEmpty](#isNotEmpty)
-      - [isPropertyEmpty](#isPropertyEmpty)
-      - [isPropertyNotEmpty](#isPropertyNotEmpty)
+    - boolean
+      - [isBoolean](#isBoolean)
+      - isTrue
+        - [isTrue](#isTrue)
+        - [isNotTrue](#isNotTrue)
+        - [isPropertyTrue](#isPropertyTrue)
+        - [isPropertyNotTrue](#isPropertyNotTrue)
+      - isFalse
+        - [isFalse](#isFalse)
+        - [isNotFalse](#isNotFalse)
+        - [isPropertyFalse](#isPropertyFalse)
+        - [isPropertyNotFalse](#isPropertyNotFalse)
+    - number
+      - [isNumber](#isNumber)
+      - isZero
+        - [isZero](#isZero)
+        - [isNotZero](#isNotZero)
+        - [isPropertyZero](#isPropertyZero)
+        - [isPropertyNotZero](#isPropertyNotZero)
+    - string
+      - [isString](#isString)
+      - isEmpty
+        - [isEmpty](#isEmpty)
+        - [isNotEmpty](#isNotEmpty)
+        - [isPropertyEmpty](#isPropertyEmpty)
+        - [isPropertyNotEmpty](#isPropertyNotEmpty)
+    - object
+      - [isObject](#isObject)
+      - [isPrimitiveObject](#isPrimitiveObject)
     - duplicates
       - [filterDuplicates](#filterDuplicates)
       - [filterDuplicatesByKey](#filterDuplicatesByKey)
@@ -376,6 +385,18 @@ const result = items.filter(isPropertyNotNull('id'))
 
 <!---------------------------------------------------------------------------->
 
+### isBoolean
+
+returns `true` iff value is of type `boolean`
+
+#### Usage
+```TypeScript
+import { isBoolean } from 'typesafe-utils'
+
+const result = [true, 'some text', 1, false].filter(isBoolean)
+// result: boolean[] => [true, false]
+```
+
 ### isTrue
 
 returns `true` iff value is `true`
@@ -515,6 +536,18 @@ const result = items.filter(isPropertyNotFalse('available'))
 
 <!---------------------------------------------------------------------------->
 
+### isNumber
+
+returns `true` iff value is of type `number`
+
+#### Usage
+```TypeScript
+import { isNumber } from 'typesafe-utils'
+
+const result = [0, false, undefined, 5].filter(isNumber)
+// result: number[] => [0, 5]
+```
+
 ### isZero
 
 returns `true` iff value is `0`
@@ -585,6 +618,18 @@ const result = items.filter(isPropertyNotZero('price'))
 
 <!---------------------------------------------------------------------------->
 
+### isString
+
+returns `true` iff value is of type `string`
+
+#### Usage
+```TypeScript
+import { isString } from 'typesafe-utils'
+
+const result = ['', false, null, 'text'].filter(isString)
+// result: string[] => ['', 'text]
+```
+
 ### isEmpty
 
 returns `true` iff value is `''`
@@ -647,6 +692,40 @@ const items: Product[] = [
 ]
 const result = items.filter(isPropertyNotEmpty('label'))
 // result: Product[] => [{ label: 'label-123' }]
+```
+
+### isObject
+
+returns `true` iff value is of type `object`
+
+#### Usage
+```TypeScript
+import { isObject } from 'typesafe-utils'
+
+type SomeType = {
+   prop?: number
+}
+
+const now = new Date()
+const result = [{}, now, null, { prop: 123 }].filter(isObject)
+// result: (SomeType | Date)[] => [{}, now, { prop: 123 }]
+```
+
+### isObject
+
+returns `true` iff value is of the primitive type `object` and not derived from a `class` like `Date` or else.
+
+#### Usage
+```TypeScript
+import { isPrimitiveObject } from 'typesafe-utils'
+
+type SomeType = {
+   prop?: number
+}
+
+const now = new Date()
+const result = [{}, now, null, { prop: 123 }].filter(isPrimitiveObject)
+// result: SomeType[] => [{}, { prop: 123 }]
 ```
 
 

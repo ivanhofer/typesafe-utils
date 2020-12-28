@@ -1,4 +1,6 @@
-import { Zero, NotZero } from '../types'
+type Zero<T> = T extends number ? 0 : never
+
+type NotZero<T> = T extends 0 ? never : T
 
 export const isZero = <T>(value: T | 0): value is Zero<T> => <unknown>value === 0
 
