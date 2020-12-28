@@ -13,13 +13,14 @@
 		"utils"
 	],
 	"license": "MIT",
-	"main": "lib/index.js",
-	"types": "lib/index.d.ts",
+	"main": "lib/cjs/index.js",
+	"module": "lib/esm/index.js",
 	"files": [
 		"/lib"
 	],
+	"types": "lib/esm/index.d.ts",
 	"scripts": {
-		"build": "tsc",
+		"build": "tsc && tsc -p tsconfig-cjs.json",
 		"lint": "eslint src",
 		"lint:fix": "eslint src --fix",
 		"test": "uvu -r ts-node/register src .*\\.test\\..*",
