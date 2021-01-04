@@ -4,8 +4,8 @@ export const is = <T, U>(item: T) => (value: U): value is Is<T, U> => <unknown>v
 
 export const isNot = <T, U>(item: T) => (value: U): value is U => <unknown>value !== item
 
-export const isProperty = <T, K extends keyof T>(property: K, item: T[K]) => (value: T): boolean =>
+export const isProperty = <T, K extends keyof T = keyof T>(property: K, item: T[K]) => (value: T): boolean =>
 	value[property] === item
 
-export const isPropertyNot = <T, K extends keyof T>(property: K, item: T[K]) => (value: T): boolean =>
+export const isPropertyNot = <T, K extends keyof T = keyof T>(property: K, item: T[K]) => (value: T): boolean =>
 	value[property] !== item

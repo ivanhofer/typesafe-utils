@@ -1,7 +1,14 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { isTruthy, isFalsy, isPropertyTruthy, isPropertyFalsy } from './isTruthy'
+import {
+	isTruthy,
+	isFalsy,
+	isPropertyTruthy,
+	isPropertyFalsy,
+	arePropertiesFalsy,
+	arePropertiesTruthy,
+} from './isTruthy'
 
 const test = suite('truthy')
 
@@ -40,6 +47,34 @@ test(`isPropertyFalsy id`, () => {
 	const filteredItems = items.filter(isPropertyFalsy('id'))
 
 	assert.ok(filteredItems.length === 2)
+})
+
+// arePropertiesTruthy ------------------------------------------------------------------------------------------------
+
+test(`arePropertiesTruthy id name`, () => {
+	const items = [
+		{ id: 0, name: 'name-1' },
+		{ id: 1, name: '' },
+		{ id: 1, name: 'name-1' },
+		{ id: null, name: '' },
+	]
+	const filteredItems = items.filter(arePropertiesTruthy('id', 'name'))
+
+	assert.ok(filteredItems.length === 1)
+})
+
+// arePropertiesFalsy -------------------------------------------------------------------------------------------------
+
+test(`arePropertiesFalsy id name`, () => {
+	const items = [
+		{ id: 0, name: 'name-1' },
+		{ id: 1, name: '' },
+		{ id: 1, name: 'name-1' },
+		{ id: null, name: '' },
+	]
+	const filteredItems = items.filter(arePropertiesFalsy('id', 'name'))
+
+	assert.ok(filteredItems.length === 1)
 })
 
 test.run()
