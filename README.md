@@ -24,16 +24,22 @@ $ npm install --save-dev typesafe-utils
       - [isFalsy](#isFalsy)
       - [isPropertyTruthy](#isPropertyTruthy)
       - [isPropertyFalsy](#isPropertyFalsy)
+      - [arePropertiesTruthy](#arePropertiesTruthy)
+      - [arePropertiesFalsy](#arePropertiesFalsy)
     - isUndefined
       - [isUndefined](#isUndefined)
       - [isNotUndefined](#isNotUndefined)
       - [isPropertyUndefined](#isPropertyUndefined)
       - [isPropertyNotUndefined](#isPropertyNotUndefined)
+      - [arePropertiesUndefined](#arePropertiesUndefined)
+      - [arePropertiesNotUndefined](#arePropertiesNotUndefined)
     - isNull
       - [isNull](#isNull)
       - [isNotNull](#isNotNull)
       - [isPropertyNull](#isPropertyNull)
       - [isPropertyNotNull](#isPropertyNotNull)
+      - [arePropertiesNull](#arePropertiesNull)
+      - [arePropertiesNotNull](#arePropertiesNotNull)
     - boolean
       - [isBoolean](#isBoolean)
       - isTrue
@@ -41,11 +47,15 @@ $ npm install --save-dev typesafe-utils
         - [isNotTrue](#isNotTrue)
         - [isPropertyTrue](#isPropertyTrue)
         - [isPropertyNotTrue](#isPropertyNotTrue)
+        - [arePropertiesTrue](#arePropertiesTrue)
+        - [arePropertiesNotTrue](#arePropertiesNotTrue)
       - isFalse
         - [isFalse](#isFalse)
         - [isNotFalse](#isNotFalse)
         - [isPropertyFalse](#isPropertyFalse)
         - [isPropertyNotFalse](#isPropertyNotFalse)
+        - [arePropertiesFalse](#arePropertiesFalse)
+        - [arePropertiesNotFalse](#arePropertiesNotFalse)
     - number
       - [isNumber](#isNumber)
       - isZero
@@ -53,6 +63,8 @@ $ npm install --save-dev typesafe-utils
         - [isNotZero](#isNotZero)
         - [isPropertyZero](#isPropertyZero)
         - [isPropertyNotZero](#isPropertyNotZero)
+        - [arePropertiesZero](#arePropertiesZero)
+        - [arePropertiesNotZero](#arePropertiesNotZero)
     - string
       - [isString](#isString)
       - isEmpty
@@ -60,6 +72,8 @@ $ npm install --save-dev typesafe-utils
         - [isNotEmpty](#isNotEmpty)
         - [isPropertyEmpty](#isPropertyEmpty)
         - [isPropertyNotEmpty](#isPropertyNotEmpty)
+        - [arePropertiesEmpty](#arePropertiesEmpty)
+        - [arePropertiesNotEmpty](#arePropertiesNotEmpty)
     - object
       - [isObject](#isObject)
       - [isPrimitiveObject](#isPrimitiveObject)
@@ -253,6 +267,42 @@ const result = items.filter(isPropertyFalsy('id'))
 // result: Product[] => [{ id: null }]
 ```
 
+### arePropertiesTruthy
+
+returns `true` iff all attributes of the object are truthy
+
+#### Usage
+```TypeScript
+import { arePropertiesTruthy } from 'typesafe-utils'
+
+type Product = {
+   id: number
+   name: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesTruthy('id', 'name'))
+```
+
+### arePropertiesFalsy
+
+returns `true` iff all attributes of the object are falsy
+
+#### Usage
+```TypeScript
+import { arePropertiesFalsy } from 'typesafe-utils'
+
+type Product = {
+   id: number
+   name: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesFalsy('id', 'name'))
+```
+
 <!---------------------------------------------------------------------------->
 
 ### isUndefined
@@ -319,6 +369,42 @@ const result = items.filter(isPropertyNotUndefined('id'))
 // result: Product[] => [{ id: 5 }]
 ```
 
+### arePropertiesUndefined
+
+returns `true` iff all attributes of the object are `undefined`
+
+#### Usage
+```TypeScript
+import { arePropertiesUndefined } from 'typesafe-utils'
+
+type Product = {
+   id: number
+   name: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesUndefined('id', 'name'))
+```
+
+### arePropertiesNotUndefined
+
+returns `true` iff all attributes of the object are **not** `undefined`
+
+#### Usage
+```TypeScript
+import { arePropertiesNotUndefined } from 'typesafe-utils'
+
+type Product = {
+   id: number
+   name: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesNotUndefined('id', 'name'))
+```
+
 <!---------------------------------------------------------------------------->
 
 ### isNull
@@ -383,6 +469,42 @@ const items: Product[] = [
 ]
 const result = items.filter(isPropertyNotNull('id'))
 // result: Product[] => [{ id: 5 }]
+```
+
+### arePropertiesNull
+
+returns `true` iff all attributes of the object are `null`
+
+#### Usage
+```TypeScript
+import { arePropertiesNull } from 'typesafe-utils'
+
+type Product = {
+   id: number
+   name: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesNull('id', 'name'))
+```
+
+### arePropertiesNotNull
+
+returns `true` iff all attributes of the object are **not** `null`
+
+#### Usage
+```TypeScript
+import { arePropertiesNotNull } from 'typesafe-utils'
+
+type Product = {
+   id: number
+   name: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesNotNull('id', 'name'))
 ```
 
 <!---------------------------------------------------------------------------->
@@ -466,6 +588,42 @@ const result = items.filter(isPropertyNotTrue('available'))
 // result: Product[] => [{ available: false }]
 ```
 
+### arePropertiesTrue
+
+returns `true` iff all attributes of the object are `true`
+
+#### Usage
+```TypeScript
+import { arePropertiesTrue } from 'typesafe-utils'
+
+type Product = {
+   count: number
+   available: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesTrue('count', 'available'))
+```
+
+### arePropertiesNotTrue
+
+returns `true` iff all attributes of the object are **not** `true`
+
+#### Usage
+```TypeScript
+import { arePropertiesNotTrue } from 'typesafe-utils'
+
+type Product = {
+   count: number
+   available: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesNotTrue('count', 'available'))
+```
+
 <!---------------------------------------------------------------------------->
 
 ### isFalse
@@ -534,6 +692,42 @@ const items: Product[] = [
 ]
 const result = items.filter(isPropertyNotFalse('available'))
 // result: Product[] => [{ available: true }]
+```
+
+### arePropertiesFalse
+
+returns `true` iff all attributes of the object are `false`
+
+#### Usage
+```TypeScript
+import { arePropertiesFalse } from 'typesafe-utils'
+
+type Product = {
+   count: number
+   available: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesFalse('count', 'available'))
+```
+
+### arePropertiesNotFalse
+
+returns `true` iff all attributes of the object are **not** `false`
+
+#### Usage
+```TypeScript
+import { arePropertiesNotFalse } from 'typesafe-utils'
+
+type Product = {
+   count: number
+   available: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesNotFalse('count', 'available'))
 ```
 
 <!---------------------------------------------------------------------------->
@@ -618,6 +812,42 @@ const result = items.filter(isPropertyNotZero('price'))
 // result: Product[] => [{ price: 23 }]
 ```
 
+### arePropertiesZero
+
+returns `true` iff all attributes of the object are `0`
+
+#### Usage
+```TypeScript
+import { arePropertiesZero } from 'typesafe-utils'
+
+type Product = {
+   count: number
+   speed: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesZero('count', 'speed'))
+```
+
+### arePropertiesNotZero
+
+returns `true` iff all attributes of the object are **not** `0`
+
+#### Usage
+```TypeScript
+import { arePropertiesNotZero } from 'typesafe-utils'
+
+type Product = {
+   count: number
+   speed: string
+}
+
+const items: Product[] = [ ... ]
+
+const result = items.filter(arePropertiesNotZero('count', 'speed'))
+```
+
 <!---------------------------------------------------------------------------->
 
 ### isString
@@ -695,6 +925,45 @@ const items: Product[] = [
 const result = items.filter(isPropertyNotEmpty('label'))
 // result: Product[] => [{ label: 'label-123' }]
 ```
+
+
+### arePropertiesEmpty
+
+returns `true` iff all attributes of the object are `''`
+
+#### Usage
+```TypeScript
+import { arePropertiesEmpty } from 'typesafe-utils'
+
+type Person = {
+   name: number
+   firstName: string
+}
+
+const items: Person[] = [ ... ]
+
+const result = items.filter(arePropertiesEmpty('name', 'firstName'))
+```
+
+### arePropertiesNotEmpty
+
+returns `true` iff all attributes of the object are **not** `''`
+
+#### Usage
+```TypeScript
+import { arePropertiesNotEmpty } from 'typesafe-utils'
+
+type Person = {
+   name: number
+   firstName: string
+}
+
+const items: Person[] = [ ... ]
+
+const result = items.filter(arePropertiesNotEmpty('name', 'firstName'))
+```
+
+<!---------------------------------------------------------------------------->
 
 ### isObject
 
@@ -784,7 +1053,7 @@ Combines (`&&`) multiple filter functions.
 #### Usage
 
 ```TypeScript
-import { and, isString, filterDuplicates } from 'typesafe-utils'
+import { and, isString } from 'typesafe-utils'
 
 const items = [null, "test", undefined, "hi"]
 const isShortString = and<any, string>(isString, (value) => value.length < 3)
@@ -799,7 +1068,7 @@ Combines (`||`) multiple filter functions.
 #### Usage
 
 ```TypeScript
-import { or, filterDuplicates } from 'typesafe-utils'
+import { or } from 'typesafe-utils'
 
 const items = [10, 2, 3, 5, 8, 1]
 const isFiveOrTen = or((value) => value === 5, (value) => value === 10)

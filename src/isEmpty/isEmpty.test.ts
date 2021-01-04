@@ -2,7 +2,14 @@ import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { Everything } from '../types'
 
-import { isEmpty, isNotEmpty, isPropertyEmpty, isPropertyNotEmpty } from './isEmpty'
+import {
+	arePropertiesEmpty,
+	arePropertiesNotEmpty,
+	isEmpty,
+	isNotEmpty,
+	isPropertyEmpty,
+	isPropertyNotEmpty,
+} from './isEmpty'
 
 const test = suite('empty')
 
@@ -41,6 +48,34 @@ test(`isPropertyNotEmpty name`, () => {
 	const filteredItems = items.filter(isPropertyNotEmpty('name'))
 
 	assert.ok(filteredItems.length === 2)
+})
+
+// arePropertiesEmpty -------------------------------------------------------------------------------------------------
+
+test(`arePropertiesEmpty name role`, () => {
+	const items = [
+		{ name: 'name-1', role: 'ADMIN' },
+		{ name: 'name-1', role: '' },
+		{ name: '', role: '' },
+		{ name: '', role: 'ADMIN' },
+	]
+	const filteredItems = items.filter(arePropertiesEmpty('name', 'role'))
+
+	assert.ok(filteredItems.length === 1)
+})
+
+// arePropertiesNotEmpty ----------------------------------------------------------------------------------------------
+
+test(`arePropertiesEmpty name role`, () => {
+	const items = [
+		{ name: 'name-1', role: 'ADMIN' },
+		{ name: 'name-1', role: '' },
+		{ name: '', role: '' },
+		{ name: '', role: 'ADMIN' },
+	]
+	const filteredItems = items.filter(arePropertiesNotEmpty('name', 'role'))
+
+	assert.ok(filteredItems.length === 1)
 })
 
 test.run()

@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { Everything } from '../types'
-import { isZero, isNotZero, isPropertyZero, isPropertyNotZero } from './isZero'
+import { isZero, isNotZero, isPropertyZero, isPropertyNotZero, arePropertiesNotZero, arePropertiesZero } from './isZero'
 
 const test = suite('zero')
 
@@ -40,6 +40,34 @@ test(`isPropertyNotZero id`, () => {
 	const filteredItems = items.filter(isPropertyNotZero('id'))
 
 	assert.ok(filteredItems.length === 2)
+})
+
+// arePropertiesZero --------------------------------------------------------------------------------------------------
+
+test(`arePropertiesZero id count`, () => {
+	const items = [
+		{ id: 0, count: 0 },
+		{ id: undefined, count: 0 },
+		{ id: 0, count: null },
+		{ id: null, count: 12 },
+	]
+	const filteredItems = items.filter(arePropertiesZero('id', 'count'))
+
+	assert.ok(filteredItems.length === 1)
+})
+
+// arePropertiesNotZero -----------------------------------------------------------------------------------------------
+
+test(`arePropertiesNotZero id count`, () => {
+	const items = [
+		{ id: 0, count: 0 },
+		{ id: undefined, count: 0 },
+		{ id: 0, count: null },
+		{ id: null, count: 12 },
+	]
+	const filteredItems = items.filter(arePropertiesNotZero('id', 'count'))
+
+	assert.ok(filteredItems.length === 1)
 })
 
 test.run()

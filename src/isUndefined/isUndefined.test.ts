@@ -1,7 +1,14 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { isUndefined, isNotUndefined, isPropertyUndefined, isPropertyNotUndefined } from './isUndefined'
+import {
+	isUndefined,
+	isNotUndefined,
+	isPropertyUndefined,
+	isPropertyNotUndefined,
+	arePropertiesUndefined,
+	arePropertiesNotUndefined,
+} from './isUndefined'
 
 const test = suite('undefined')
 
@@ -40,6 +47,34 @@ test(`isPropertyNotUndefined id`, () => {
 	const filteredItems = items.filter(isPropertyNotUndefined('id'))
 
 	assert.ok(filteredItems.length === 2)
+})
+
+// arePropertiesUndefined ---------------------------------------------------------------------------------------------
+
+test(`arePropertiesUndefined id name`, () => {
+	const items = [
+		{ id: 0, name: undefined },
+		{ id: 12, name: 'name-1' },
+		{ id: undefined, name: undefined },
+		{ id: null, name: undefined },
+	]
+	const filteredItems = items.filter(arePropertiesUndefined('id', 'name'))
+
+	assert.ok(filteredItems.length === 1)
+})
+
+// arePropertiesNotUndefined ------------------------------------------------------------------------------------------
+
+test(`arePropertiesNotUndefined id name`, () => {
+	const items = [
+		{ id: 0, name: undefined },
+		{ id: 12, name: 'name-1' },
+		{ id: undefined, name: undefined },
+		{ id: null, name: undefined },
+	]
+	const filteredItems = items.filter(arePropertiesNotUndefined('id', 'name'))
+
+	assert.ok(filteredItems.length === 1)
 })
 
 test.run()

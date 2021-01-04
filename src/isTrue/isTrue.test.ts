@@ -2,7 +2,7 @@ import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { Everything } from '../types'
 
-import { isTrue, isNotTrue, isPropertyNotTrue, isPropertyTrue } from './isTrue'
+import { isTrue, isNotTrue, isPropertyNotTrue, isPropertyTrue, arePropertiesTrue, arePropertiesNotTrue } from './isTrue'
 
 const test = suite('true')
 
@@ -41,6 +41,34 @@ test(`isPropertyNotTrue available`, () => {
 	const filteredItems = items.filter(isPropertyNotTrue('available'))
 
 	assert.ok(filteredItems.length === 2)
+})
+
+// arePropertiesTrue --------------------------------------------------------------------------------------------------
+
+test(`arePropertiesTrue available inStock`, () => {
+	const items = [
+		{ available: 'some-id', inStock: true },
+		{ available: true, inStock: true },
+		{ available: 'some-id', inStock: false },
+		{ available: null, inStock: true },
+	]
+	const filteredItems = items.filter(arePropertiesTrue('available', 'inStock'))
+
+	assert.ok(filteredItems.length === 1)
+})
+
+// arePropertiesNotTrue -----------------------------------------------------------------------------------------------
+
+test(`arePropertiesNotTrue available inStock`, () => {
+	const items = [
+		{ available: 'some-id', inStock: true },
+		{ available: true, inStock: true },
+		{ available: 'some-id', inStock: false },
+		{ available: null, inStock: true },
+	]
+	const filteredItems = items.filter(arePropertiesNotTrue('available', 'inStock'))
+
+	assert.ok(filteredItems.length === 1)
 })
 
 test.run()
