@@ -889,7 +889,7 @@ const items: Car[] = [
    { speed: 100 },
    { speed: 95 }
 ]
-const result = items.sort(sortNumberPropertyASC)
+const result = items.sort(sortNumberPropertyASC('speed'))
 // result: Car[] => [{ speed: 95 }, { speed: 100 }, { speed: 113 }}
 ```
 
@@ -956,7 +956,7 @@ const items: Car[] = [
    { color: 'brown' }
 ]
 
-const result = items.sort(sortStringPropertyASC)
+const result = items.sort(sortStringPropertyASC('color'))
 // result: Car[] => [{ color: 'brown' }, { color: 'green' }]
 ```
 
@@ -976,7 +976,7 @@ const items: Car[] = [
    { color: 'red' },
    { color: 'blue' }
 ]
-const result = items.sort(sortStringPropertyDESC)
+const result = items.sort(sortStringPropertyDESC('color'))
 // result: Car[] => [{ color: 'red' }, { color: 'blue' }]
 ```
 
@@ -1033,7 +1033,7 @@ const items: Smartphone[] = [
 ]
 
 const items: Smartphone[] = []
-const result = items.sort(sortDatePropertyASC)
+const result = items.sort(sortDatePropertyASC('releaseDate'))
 // result: Smartphone[]=> [{ releaseDate: today }, { releaseDate: tomorrow }]
 ```
 
@@ -1056,7 +1056,7 @@ const items: Smartphone[] = [
    { releaseDate: today },
    { releaseDate: tomorrow }
 ]
-const result = items.sort(sortDatePropertyDESC)
+const result = items.sort(sortDatePropertyDESC('releaseDate'))
 // result: Smartphone[] => [{ releaseDate: tomorrow }, { releaseDate: today }]
 ```
 
