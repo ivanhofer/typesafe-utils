@@ -74,6 +74,8 @@ $ npm install --save-dev typesafe-utils
         - [isPropertyNotEmpty](#isPropertyNotEmpty)
         - [arePropertiesEmpty](#arePropertiesEmpty)
         - [arePropertiesNotEmpty](#arePropertiesNotEmpty)
+    - array
+      - [isArray](#isArray)
     - object
       - [isObject](#isObject)
       - [isPrimitiveObject](#isPrimitiveObject)
@@ -965,6 +967,20 @@ const result = items.filter(arePropertiesNotEmpty('name', 'firstName'))
 
 <!---------------------------------------------------------------------------->
 
+### isArray
+
+returns `true` iff value is of type `Array`
+
+#### Usage
+```TypeScript
+import { isArray } from 'typesafe-utils'
+
+const result = [[], null, 123, [0, 1]].filter(isArray)
+// result: number[][] => [[], [0, 1]]
+```
+
+<!---------------------------------------------------------------------------->
+
 ### isObject
 
 returns `true` iff value is of type `object`
@@ -982,7 +998,7 @@ const result = [{}, now, null, { prop: 123 }].filter(isObject)
 // result: (SomeType | Date)[] => [{}, now, { prop: 123 }]
 ```
 
-### isObject
+### isPrimitiveObject
 
 returns `true` iff value is of the primitive type `object` and not derived from a `class` like `Date` or else.
 

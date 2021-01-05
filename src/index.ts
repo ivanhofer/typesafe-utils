@@ -4,6 +4,8 @@ export { filterDuplicates, filterDuplicatesByKey } from './filterDuplicates/filt
 
 export { is, isNot, isProperty, isPropertyNot } from './is/is'
 
+export { isArray } from './isArray/isArray'
+
 export {
 	isEmpty,
 	isNotEmpty,
