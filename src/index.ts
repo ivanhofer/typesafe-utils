@@ -3,13 +3,69 @@ export { deepClone } from './deepClone/deepClone'
 export { filterDuplicates, filterDuplicatesByKey } from './filterDuplicates/filterDuplicates'
 
 export { is, isNot, isProperty, isPropertyNot } from './is/is'
-export { isEmpty, isNotEmpty, isPropertyEmpty, isPropertyNotEmpty } from './isEmpty/isEmpty'
-export { isFalse, isNotFalse, isPropertyFalse, isPropertyNotFalse } from './isFalse/isFalse'
-export { isNull, isNotNull, isPropertyNull, isPropertyNotNull } from './isNull/isNull'
-export { isTrue, isNotTrue, isPropertyTrue, isPropertyNotTrue } from './isTrue/isTrue'
-export { isTruthy, isFalsy, isPropertyTruthy, isPropertyFalsy } from './isTruthy/isTruthy'
-export { isUndefined, isNotUndefined, isPropertyUndefined, isPropertyNotUndefined } from './isUndefined/isUndefined'
-export { isZero, isNotZero, isPropertyZero, isPropertyNotZero } from './isZero/isZero'
+
+export {
+	isEmpty,
+	isNotEmpty,
+	isPropertyEmpty,
+	isPropertyNotEmpty,
+	arePropertiesEmpty,
+	arePropertiesNotEmpty,
+} from './isEmpty/isEmpty'
+
+export {
+	isFalse,
+	isNotFalse,
+	isPropertyFalse,
+	isPropertyNotFalse,
+	arePropertiesFalse,
+	arePropertiesNotFalse,
+} from './isFalse/isFalse'
+
+export {
+	isNull,
+	isNotNull,
+	isPropertyNull,
+	isPropertyNotNull,
+	arePropertiesNull,
+	arePropertiesNotNull,
+} from './isNull/isNull'
+
+export {
+	isTrue,
+	isNotTrue,
+	isPropertyTrue,
+	isPropertyNotTrue,
+	arePropertiesTrue,
+	arePropertiesNotTrue,
+} from './isTrue/isTrue'
+
+export {
+	isTruthy,
+	isFalsy,
+	isPropertyTruthy,
+	isPropertyFalsy,
+	arePropertiesTruthy,
+	arePropertiesFalsy,
+} from './isTruthy/isTruthy'
+
+export {
+	isUndefined,
+	isNotUndefined,
+	isPropertyUndefined,
+	isPropertyNotUndefined,
+	arePropertiesUndefined,
+	arePropertiesNotUndefined,
+} from './isUndefined/isUndefined'
+
+export {
+	isZero,
+	isNotZero,
+	isPropertyZero,
+	isPropertyNotZero,
+	arePropertiesZero,
+	arePropertiesNotZero,
+} from './isZero/isZero'
 
 export {
 	sortNumberASC,
@@ -27,8 +83,11 @@ export {
 } from './sorting/sorting'
 
 export { isObject, isPrimitiveObject } from './isObject/isObject'
+
 export { isString } from './isString/isString'
+
 export { isNumber } from './isNumber/isNumber'
+
 export { isBoolean } from './isBoolean/isBoolean'
 
 export { and, or, not } from './logical/logical'
