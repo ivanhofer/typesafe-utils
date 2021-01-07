@@ -1,6 +1,6 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
-import { isArray } from './isArray'
+import { isArray, isArrayEmpty, isArrayNotEmpty } from './isArray'
 
 const test = suite('isArray')
 
@@ -18,5 +18,29 @@ test(`isArray`, () => {
 
 const onlyArrays = items.filter(isArray)
 onlyArrays[0] && onlyArrays[0][0] && onlyArrays[0][0].toFixed()
+
+// isArrayEmpty -------------------------------------------------------------------------------------------------------
+
+test(`isArrayEmpty`, () => {
+	assert.equal(isArrayEmpty([]), true)
+	assert.equal(isArrayEmpty([123, 123]), false)
+})
+
+const emptyArray: string[] = []
+if (isArrayEmpty(emptyArray)) {
+	emptyArray.length === 0
+}
+
+// isArrayNotEmpty ----------------------------------------------------------------------------------------------------
+
+test(`isArrayNotEmpty`, () => {
+	assert.equal(isArrayNotEmpty([]), false)
+	assert.equal(isArrayNotEmpty([123, 123]), true)
+})
+
+const nonEmptyArray = ['hi']
+if (isArrayNotEmpty(nonEmptyArray)) {
+	nonEmptyArray[0].toUpperCase()
+}
 
 test.run()
