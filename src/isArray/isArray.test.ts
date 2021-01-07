@@ -35,7 +35,7 @@ if (isArrayEmpty(emptyArray)) {
 
 test(`isArrayNotEmpty`, () => {
 	assert.equal(isArrayNotEmpty([]), false)
-	assert.equal(isArrayEmpty([123, 123]), true)
+	assert.equal(isArrayNotEmpty([123, 123]), true)
 })
 
 const nonEmptyArray = ['hi']
