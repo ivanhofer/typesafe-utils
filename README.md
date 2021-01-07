@@ -76,6 +76,8 @@ $ npm install --save-dev typesafe-utils
         - [arePropertiesNotEmpty](#arePropertiesNotEmpty)
     - array
       - [isArray](#isArray)
+      - [isArrayNotEmpty](#isArrayNotEmpty)
+      - [isArrayEmpty](#isArrayEmpty)
     - object
       - [isObject](#isObject)
       - [isPrimitiveObject](#isPrimitiveObject)
@@ -977,6 +979,40 @@ import { isArray } from 'typesafe-utils'
 
 const result = [[], null, 123, [0, 1]].filter(isArray)
 // result: number[][] => [[], [0, 1]]
+```
+
+### isArrayNotEmpty
+
+returns `true` iff an array contains at least one item
+
+#### Usage
+```TypeScript
+import { isArrayNotEmpty } from 'typesafe-utils'
+
+const nonEmptyArray = ['hi']
+
+if (!!nonEmptyArray.length) {
+	nonEmptyArray[0].toUpperCase() // ERROR: Object is possibly 'undefined'
+}
+
+if (isArrayNotEmpty(nonEmptyArray)) {
+   // TypeScript will know that the array contains at least 1 item, so it will not complain
+	nonEmptyArray[0].toUpperCase()
+}
+```
+
+### isArrayEmpty
+
+returns `true` iff an array contains no items
+
+#### Usage
+```TypeScript
+import { isArrayEmpty } from 'typesafe-utils'
+
+const emptyArray: string[] = []
+if (isArrayEmpty(emptyArray)) {
+	// emptyArray does not contain any items
+}
 ```
 
 <!---------------------------------------------------------------------------->
