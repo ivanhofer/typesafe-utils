@@ -44,27 +44,27 @@ $ npm install --save-dev typesafe-utils
       - [isBoolean](#isBoolean)
       - isTrue
         - [isTrue](#isTrue)
-        - [isNotTrue](#isNotTrue)
+        - [isNotTrue](#isNotTrue)*
         - [isPropertyTrue](#isPropertyTrue)
-        - [isPropertyNotTrue](#isPropertyNotTrue)
+        - [isPropertyNotTrue](#isPropertyNotTrue)*
         - [arePropertiesTrue](#arePropertiesTrue)
-        - [arePropertiesNotTrue](#arePropertiesNotTrue)
+        - [arePropertiesNotTrue](#arePropertiesNotTrue)*
       - isFalse
         - [isFalse](#isFalse)
-        - [isNotFalse](#isNotFalse)
+        - [isNotFalse](#isNotFalse)*
         - [isPropertyFalse](#isPropertyFalse)
-        - [isPropertyNotFalse](#isPropertyNotFalse)
+        - [isPropertyNotFalse](#isPropertyNotFalse)*
         - [arePropertiesFalse](#arePropertiesFalse)
-        - [arePropertiesNotFalse](#arePropertiesNotFalse)
+        - [arePropertiesNotFalse](#arePropertiesNotFalse)*
     - number
       - [isNumber](#isNumber)
       - isZero
         - [isZero](#isZero)
-        - [isNotZero](#isNotZero)
+        - [isNotZero](#isNotZero)*
         - [isPropertyZero](#isPropertyZero)
-        - [isPropertyNotZero](#isPropertyNotZero)
+        - [isPropertyNotZero](#isPropertyNotZero)*
         - [arePropertiesZero](#arePropertiesZero)
-        - [arePropertiesNotZero](#arePropertiesNotZero)
+        - [arePropertiesNotZero](#arePropertiesNotZero)*
     - string
       - [isString](#isString)
       - isEmpty
@@ -85,9 +85,9 @@ $ npm install --save-dev typesafe-utils
       - [filterDuplicates](#filterDuplicates)
       - [filterDuplicatesByKey](#filterDuplicatesByKey)
     - logical operators
-      - [and](#and)
-      - [or](#or)
-      - [not](#not)
+      - [and](#and)*
+      - [or](#or)*
+      - [not](#not)*
 
  - [sorting functions](#sorting&#32;functions)
     - number
@@ -108,6 +108,8 @@ $ npm install --save-dev typesafe-utils
 
  - [other](#other)
    - [deepClone](#deepClone)
+
+| * not automatically 100% typesafe. It's better than nothing but to be 100% typesafe you need to pass generics yourself.
 
 ## filter functions
 
