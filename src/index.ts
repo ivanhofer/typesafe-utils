@@ -1,5 +1,7 @@
 export { deepClone } from './deepClone/deepClone'
 
+export { createFilter } from './filter/filter'
+
 export { filterDuplicates, filterDuplicatesByKey } from './filterDuplicates/filterDuplicates'
 
 export { is, isNot, isProperty, isPropertyNot } from './is/is'

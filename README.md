@@ -88,6 +88,8 @@ $ npm install --save-dev typesafe-utils
       - [and](#and)*
       - [or](#or)*
       - [not](#not)*
+    - typeguards
+      - [createFilter](#createFilter)*
 
  - [sorting functions](#sorting&#32;functions)
     - number
@@ -1162,6 +1164,37 @@ const filteredItems = items.filter(not<Product>(filterDuplicatesByKey('name')))
 const notNull = [1, 5, null].filter<number | null, number>(not((value => value === null)))
 // notNull: number[] => [1, 5]
 
+```
+
+
+
+### createFilter
+
+Creates a typeguard filter.
+
+#### Usage
+
+```TypeScript
+import { createFilter } from 'typesafe-utils'
+
+interface Item {
+   id: number
+}
+
+interface ItemWithName extends Item {
+   name: string
+}
+
+const items: (Item | ItemWithName | undefined)[] = [
+   { id: 1 },
+   undefined
+   { id: 3, name: 'name-1' },
+   { id: 4 }
+]
+
+const filterHasName = createFilter<ItemWithName>((item) => !!item?.name)
+const filteredItems = items.filter(filterHasName)
+// filteredItems: ItemWithName[] => [{ id: 3, name: 'name-1' }]
 ```
 
 
