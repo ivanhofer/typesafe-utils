@@ -73,6 +73,18 @@ export {
 	arePropertiesNotZero,
 } from './isZero/isZero'
 
+export { isObject, isPrimitiveObject } from './isObject/isObject'
+
+export { isString } from './isString/isString'
+
+export { isNumber } from './isNumber/isNumber'
+
+export { isBoolean } from './isBoolean/isBoolean'
+
+export { and, or, not } from './logical/logical'
+
+export { pick } from './pick/pick'
+
 export {
 	sortNumberASC,
 	sortNumberDESC,
@@ -87,13 +99,3 @@ export {
 	sortDatePropertyASC,
 	sortDatePropertyDESC,
 } from './sorting/sorting'
-
-export { isObject, isPrimitiveObject } from './isObject/isObject'
-
-export { isString } from './isString/isString'
-
-export { isNumber } from './isNumber/isNumber'
-
-export { isBoolean } from './isBoolean/isBoolean'
-
-export { and, or, not } from './logical/logical'

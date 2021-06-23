@@ -108,6 +108,9 @@ $ npm install --save-dev typesafe-utils
       - [sortDatePropertyASC](#sortDatePropertyASC)
       - [sortDatePropertyDESC](#sortDatePropertyDESC)
 
+ - [mapping functions](#mapping&#32;functions)
+   - [pick](#pick)
+
  - [other](#other)
    - [deepClone](#deepClone)
 
@@ -1416,6 +1419,35 @@ const result = items.sort(sortDatePropertyDESC('releaseDate'))
 // result: Smartphone[] => [{ releaseDate: tomorrow }, { releaseDate: today }]
 ```
 
+
+<!---------------------------------------------------------------------------->
+
+## mapping functions
+
+### pick
+
+Picks an attribute from an Object.
+
+#### Usage
+
+```TypeScript
+import { pick } from 'typesafe-utils'
+
+interface Item {
+   id: number
+   name: string
+   price: number
+}
+
+const items: Item[] = [
+   { id: 1, name: '', price: 123 },
+   { id: 3, name: '', price: 0 },
+   { id: 7, name: '', price: 12 },
+]
+
+const ids = item.map(pick('id'))
+// ids: number[] => [ 1, 3, 7 ]
+```
 
 
 <!---------------------------------------------------------------------------->
