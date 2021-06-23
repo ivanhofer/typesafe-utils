@@ -55,7 +55,7 @@ test(`not isNotNull`, () => {
 	assert.ok(filteredItems.length === 1)
 })
 
-const _explicitType: number[] = [null, 123].filter(not<number | null, number>(isNotNull))
+const _explicitType: number[] = [null, 123].filter(not<number>(isNotNull))
 const _autoType: number[] = [123, undefined].filter(not(isNotUndefined))
 
 test.run()
