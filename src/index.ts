@@ -1,3 +1,5 @@
+export type { Truthy, Falsy } from './isTruthy/isTruthy'
+
 export { deepClone } from './deepClone/deepClone'
 
 export { createFilter } from './filter/filter'

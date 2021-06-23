@@ -1112,7 +1112,7 @@ Combines (`&&`) multiple filter functions.
 import { and, isString } from 'typesafe-utils'
 
 const items = [null, "test", undefined, "hi"]
-const isShortString = and<any, string>(isString, (value) => value.length < 3)
+const isShortString = and<string, any>(isString, (value) => value.length < 3)
 const filteredItems = items.filter(isShortString)
 // filteredItems: string[] => ['hi']
 ```
@@ -1158,10 +1158,10 @@ const filteredItems = items.filter(not<Product>(filterDuplicatesByKey('name')))
 
 
 // The `not` function takes two optional type arguments.
-// The first is the Type of the Array you want to filter.
-// The second is the type you expect the filter function to return.
+// The first is the type you expect the filter function to return.
+// The second is the Type of the Array you want to filter.
 // e.g.
-const notNull = [1, 5, null].filter<number | null, number>(not((value => value === null)))
+const notNull = [1, 5, null].filter<number, number | null>(not((value => value === null)))
 // notNull: number[] => [1, 5]
 
 ```

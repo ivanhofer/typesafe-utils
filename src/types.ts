@@ -1,5 +1,7 @@
 export type Everything = {} | null | undefined
 
+export type FalsyType = false | '' | 0 | null | undefined
+
 export type FilterFn<InputType, ReturnType extends InputType = InputType> =
 	| ((value: InputType, i?: number, array?: InputType[]) => boolean)
 	| ((value: InputType, i?: number, array?: InputType[]) => value is ReturnType)

@@ -1,8 +1,8 @@
-type FalsyType = false | '' | 0 | null | undefined
+import { FalsyType } from '../types'
 
-type Truthy<T> = T extends FalsyType ? never : T
+export type Truthy<T> = T extends FalsyType ? never : T
 
-type Falsy<T> = T extends FalsyType ? T : never
+export type Falsy<T> = T extends FalsyType ? T : never
 
 export const isTruthy = <T>(value: T): value is Truthy<T> => !!value
 
