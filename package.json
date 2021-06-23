@@ -3,6 +3,7 @@
 	"version": "1.11.1",
 	"description": "A few small typesafe utilities",
 	"homepage": "https://github.com/ivanhofer/typesafe-utils",
+	"repository": "https://github.com/ivanhofer/typesafe-utils",
 	"author": "ivanhofer",
 	"keywords": [
 		"typescript",
@@ -30,15 +31,16 @@
 	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "^1.0.1",
-		"@typescript-eslint/eslint-plugin": "^4.26.1",
-		"@typescript-eslint/parser": "^4.26.1",
-		"eslint": "^7.28.0",
+		"@types/node": "^15.12.4",
+		"@typescript-eslint/eslint-plugin": "^4.28.0",
+		"@typescript-eslint/parser": "^4.28.0",
+		"eslint": "^7.29.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^3.4.0",
 		"nyc": "^15.1.0",
 		"prettier": "^2.3.1",
 		"ts-node": "^10.0.0",
-		"typescript": "^4.3.2",
+		"typescript": "^4.3.4",
 		"uvu": "^0.5.1",
 		"watchlist": "^0.2.3"
 	}
