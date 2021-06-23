@@ -3,7 +3,7 @@ name: Update version & publish to npm
 on:
    push:
       branches:
-         - 'master'
+         - 'main'
 
 jobs:
    publish:
