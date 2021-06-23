@@ -1,7 +1,12 @@
-type Filter<R, I> = I extends R ? R : never
+import { InferType } from '../types'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const createFilter = <R extends I, I = R & any>(
-	filterFn: (item: I, index?: number, array?: I[]) => boolean,
-): ((item: I, index?: number, array?: I[]) => item is Filter<R, I>) =>
-	filterFn as (item: I, index?: number, array?: I[]) => item is Filter<R, I>
+type Filter<ReturnType, InputType> = InputType extends ReturnType
+	? InputType
+	: InputType extends unknown
+	? ReturnType
+	: never
+
+export const createFilter = <ReturnType extends InputType, InputType = ReturnType>(
+	filterFn: (item: InferType<InputType>) => boolean,
+): InferType<(item: InferType<InputType>) => item is Filter<InferType<ReturnType>, InferType<InputType>>> =>
+	filterFn as unknown as any
