@@ -1,3 +1,3 @@
-type IsString<T> = T extends string ? T : never
+import { TypeGuard } from '../types'
 
-export const isString = <T>(value: T): value is IsString<T> => typeof value === 'string'
+export const isString = <T>(value: T): value is TypeGuard<string, T> => typeof value === 'string'

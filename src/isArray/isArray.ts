@@ -1,6 +1,7 @@
-type IsArray<T> = T extends Array<unknown> ? T : never
 
-export const isArray = <T>(value: T): value is IsArray<T> => Array.isArray(value)
+export type TypeGuard<Guard, Type, ReturnType extends Type = Type> = Type extends Guard ? Type extends ReturnType ? Type : ReturnType : never
+
+export const isArray = <T>(value: T): value is TypeGuard<Array<unknown>, T> => Array.isArray(value)
 
 type NotEmptyArray<T> = [T, ...T[]]
 

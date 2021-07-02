@@ -1,10 +1,8 @@
-type Empty<T> = T extends string ? '' : never
+import { TypeGuard, TypeGuardInverted } from '../types'
 
-type NotEmpty<T> = T extends string ? never : T
+export const isEmpty = <T>(value: T | ''): value is TypeGuard<string, T, ''> => <unknown>value === ''
 
-export const isEmpty = <T>(value: T | ''): value is Empty<T> => <unknown>value === ''
-
-export const isNotEmpty = <T>(value: T): value is NotEmpty<T> => <unknown>value !== ''
+export const isNotEmpty = <T>(value: T): value is TypeGuardInverted<string, T> => <unknown>value !== ''
 
 export const isPropertyEmpty = <T, K extends keyof T = keyof T>(property: K) => (value: T): boolean =>
 	<unknown>value[property] === ''

@@ -1,8 +1,8 @@
-import { FalsyType } from '../types'
+import { FalsyType, TypeGuard, TypeGuardInverted } from '../types'
 
-export type Truthy<T> = T extends FalsyType ? never : T
+export type Truthy<T> = TypeGuardInverted<FalsyType, T>
 
-export type Falsy<T> = T extends FalsyType ? T : never
+export type Falsy<T> = TypeGuard<FalsyType, T>
 
 export const isTruthy = <T>(value: T): value is Truthy<T> => !!value
 

@@ -1,6 +1,6 @@
-type Is<T, U> = U extends T ? U : never
+import { TypeGuard } from '../types'
 
-export const is = <T, U>(item: T) => (value: U): value is Is<T, U> => <unknown>value === item
+export const is = <T, U>(item: T) => (value: U): value is TypeGuard<T, U> => <unknown>value === item
 
 export const isNot = <T, U>(item: T) => (value: U): value is U => <unknown>value !== item
 

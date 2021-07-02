@@ -1,3 +1,3 @@
-type IsNumber<T> = T extends number ? T : never
+import { TypeGuard } from '../types'
 
-export const isNumber = <T>(value: T): value is IsNumber<T> => typeof value === 'number'
+export const isNumber = <T>(value: T): value is TypeGuard<number, T> => typeof value === 'number'

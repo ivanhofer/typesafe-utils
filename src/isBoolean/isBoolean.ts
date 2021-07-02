@@ -1,3 +1,3 @@
-type IsBoolean<T> = T extends boolean ? T : never
+import { TypeGuard } from '../types'
 
-export const isBoolean = <T>(value: T): value is IsBoolean<T> => typeof value === 'boolean'
+export const isBoolean = <T>(value: T): value is TypeGuard<boolean, T> => typeof value === 'boolean'

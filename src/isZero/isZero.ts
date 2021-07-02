@@ -1,10 +1,9 @@
-type Zero<T> = T extends number ? 0 : never
+import { TypeGuard, TypeGuardInverted } from '../types'
 
-type NotZero<T> = T extends 0 ? never : T
 
-export const isZero = <T>(value: T | 0): value is Zero<T> => <unknown>value === 0
+export const isZero = <T>(value: T | 0): value is TypeGuard<number, T, 0> => <unknown>value === 0
 
-export const isNotZero = <T>(value: T): value is NotZero<T> => <unknown>value !== 0
+export const isNotZero = <T>(value: T): value is TypeGuardInverted<0, T> => <unknown>value !== 0
 
 export const isPropertyZero = <T, K extends keyof T = keyof T>(property: K) => (value: T): boolean =>
 	<unknown>value[property] === 0

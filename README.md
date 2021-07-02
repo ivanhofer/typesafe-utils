@@ -89,7 +89,7 @@ $ npm install --save-dev typesafe-utils
       - [or](#or)*
       - [not](#not)*
     - typeguards
-      - [createFilter](#createFilter)*
+      - [createFilter](#TypeGuardInverted)*
 
  - [sorting functions](#sorting&#32;functions)
     - number
@@ -113,6 +113,12 @@ $ npm install --save-dev typesafe-utils
 
  - [other](#other)
    - [deepClone](#deepClone)
+
+ - [types](#types)
+   - [Truthy](#truthy)
+   - [Falsy](#falsy)
+   - [TypeGuard](#typeguard)
+   - [TypeGuardInverted](#typeguardinverted)
 
 | * not automatically 100% typesafe. It's better than nothing but to be 100% typesafe you need to pass generics yourself.
 
@@ -1468,4 +1474,82 @@ import { deepClone } from 'typesafe-utils'
 const objectToClone: MyTypedObject = { ... }
 const clonedObject = deepClone(objectToClone)
 // => clonedObject: MyTypedObject => { ... }
+```
+
+
+<!---------------------------------------------------------------------------->
+
+## Types
+
+### Truthy
+
+Contains all `Truthy` values (everything excluding [Falsy](#falsy) values)
+
+#### Usage
+
+```TypeScript
+import { Truthy } from 'typesafe-utils'
+
+export const isTruthy = <T>(value: T): value is Truthy<T> => !!value
+
+const truthy = [123, undefined].filter(isTruthy) // => number[]
+const notTruthy = [false, true].filter(isTruthy) // => never[]
+```
+
+
+### Falsy
+
+Contains all `Falsy` values (false | '' | 0 | null | undefined)
+
+#### Usage
+
+```TypeScript
+import { Falsy } from 'typesafe-utils'
+
+export const isFalsy = <T>(value: T): value is Falsy<T> => !value
+
+const falsy = [undefined, ''].filter(isFalsy) // => undefined[]
+const notFalsy = [0, ''].filter(isFalsy) // => never[]
+```
+
+
+### TypeGuard
+
+Allows you to write custom `TypeGuard` functions.
+
+#### Usage
+
+```TypeScript
+import { TypeGuard } from 'typesafe-utils'
+
+type Project {
+   id: number
+   // ...
+}
+
+const isProject = <T>(value: T): value is TypeGuard<Project, T> => value?.hasOwnProperty('id')
+
+const p1 = isProject({ id: 1 }) // => true
+const p2 = isProject(true) // => false
+```
+
+
+### TypeGuardInverted
+
+Allows you to write custom inverted `TypeGuard` functions.
+
+#### Usage
+
+```TypeScript
+import { TypeGuardInverted } from 'typesafe-utils'
+
+type Project {
+   id: number
+   // ...
+}
+
+const isNotProject = <T>(value: T): value is TypeGuardInverted<Project, T> => !value?.hasOwnProperty('id')
+
+const p1 = isNotProject({ id: 1 }) // => false
+const p2 = isNotProject(null) // => true
 ```
