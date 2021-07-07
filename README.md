@@ -118,7 +118,9 @@ $ npm install --save-dev typesafe-utils
    - [Truthy](#truthy)
    - [Falsy](#falsy)
    - [TypeGuard](#typeguard)
+   - [TypeGuardWithReturnType](#typeguardwithreturntype)
    - [TypeGuardInverted](#typeguardinverted)
+   - [TypeGuardInvertedWithReturnType](#typeguardinvertedwithreturntype)
 
 | * not automatically 100% typesafe. It's better than nothing but to be 100% typesafe you need to pass generics yourself.
 
@@ -1514,6 +1516,7 @@ const notFalsy = [0, ''].filter(isFalsy) // => never[]
 
 
 ### TypeGuard
+### TypeGuardWithReturnType
 
 Allows you to write custom `TypeGuard` functions.
 
@@ -1535,6 +1538,7 @@ const p2 = isProject(true) // => false
 
 
 ### TypeGuardInverted
+### TypeGuardInvertedWithReturnType
 
 Allows you to write custom inverted `TypeGuard` functions.
 

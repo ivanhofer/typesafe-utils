@@ -1,7 +1,6 @@
-import { TypeGuard, TypeGuardInverted } from '../types'
+import { TypeGuard, TypeGuardWithReturnType, TypeGuardInverted } from '../types'
 
-
-export const isZero = <T>(value: T | 0): value is TypeGuard<number, T, 0> => <unknown>value === 0
+export const isZero = <T>(value: T | 0): value is TypeGuardWithReturnType<number, T, 0> => <unknown>value === 0
 
 export const isNotZero = <T>(value: T): value is TypeGuardInverted<0, T> => <unknown>value !== 0
 

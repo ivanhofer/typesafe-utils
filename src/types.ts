@@ -2,14 +2,24 @@ export type Everything = {} | null | undefined
 
 export type FalsyType = false | '' | 0 | null | undefined
 
-export type TypeGuard<Guard, Type, ReturnType = Type> =
+export type TypeGuard<Guard, Type> =
+	Type extends Guard
+	? Type
+	: never
+
+export type TypeGuardWithReturnType<Guard, Type, ReturnType = Type> =
 	Type extends Guard
 	? Type extends ReturnType
 	? Type
 	: ReturnType
 	: never
 
-export type TypeGuardInverted<Guard, Type, ReturnType = Type> =
+export type TypeGuardInverted<Guard, Type> =
+	Type extends Guard
+	? never
+	: Type
+
+export type TypeGuardInvertedWithReturnType<Guard, Type, ReturnType = Type> =
 	Type extends Guard
 	? never
 	: Type extends ReturnType

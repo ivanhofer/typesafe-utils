@@ -1,4 +1,4 @@
-export type { TypeGuard, TypeGuardInverted } from './types'
+export type { TypeGuard, TypeGuardWithReturnType, TypeGuardInverted, TypeGuardInvertedWithReturnType } from './types'
 export type { Truthy, Falsy } from './isTruthy/isTruthy'
 
 export { deepClone } from './deepClone/deepClone'
