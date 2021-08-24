@@ -100,3 +100,5 @@ export {
 	sortDatePropertyASC,
 	sortDatePropertyDESC,
 } from './sorting/sorting'
+
+export { uniqueArray } from './uniqueArray/uniqueArray'
