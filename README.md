@@ -113,6 +113,7 @@ $ npm install --save-dev typesafe-utils
 
  - [other](#other)
    - [deepClone](#deepClone)
+   - [uniqueArray](#uniqueArray)
 
  - [types](#types)
    - [Truthy](#truthy)
@@ -1476,6 +1477,20 @@ import { deepClone } from 'typesafe-utils'
 const objectToClone: MyTypedObject = { ... }
 const clonedObject = deepClone(objectToClone)
 // => clonedObject: MyTypedObject => { ... }
+```
+
+
+### uniqueArray
+
+Removes duplicates from an array.
+
+#### Usage
+
+```TypeScript
+import { uniqueArray } from 'typesafe-utils'
+
+const unique = uniqueArray('John', 'Max', 'John')
+// => unique: string[] => ['John', 'Max']
 ```
 
 
