@@ -1454,7 +1454,7 @@ const items: Item[] = [
    { id: 7, name: '', price: 12 },
 ]
 
-const ids = item.map(pick('id'))
+const ids = items.map(pick('id'))
 // ids: number[] => [ 1, 3, 7 ]
 ```
 
